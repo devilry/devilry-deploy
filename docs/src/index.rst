@@ -1,6 +1,8 @@
 Devilry deployment docs
 =============================================
 
+Deployment docs and scripts for `Devilry <http://devilry.org>`_:
+
 .. toctree::
    :maxdepth: 2
 
