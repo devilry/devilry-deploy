@@ -27,7 +27,7 @@ DATABASES["default"] = {
 
     # Path to sqlite database file - created by syncdb if it does not exist
     #'NAME': '/path/to/mydb.sqlite3'
-    'NAME': join(this_dir, 'mydb.sqlite3') # put the DB in the same dir as this file
+    'NAME': join(this_dir, 'mydb.sqlite3') # put the DB in the same dir as this file - probably no a good idea in production
 }
 
 ## Example config for PostgreSQL
@@ -46,7 +46,8 @@ DATABASES["default"] = {
 ###############################
 ## Where do we store files that students deliver?
 #DEVILRY_FSHIERDELIVERYSTORE_ROOT = '/var/devilry-filestorage'
-DEVILRY_FSHIERDELIVERYSTORE_ROOT = join(this_dir, 'filestorage')  # put the files in a subdirectory of the directory containing this file
+# put the files in a subdirectory of the directory containing this file - probably not a good idea in production
+DEVILRY_FSHIERDELIVERYSTORE_ROOT = join(this_dir, 'filestorage')
 
 
 #####################################################################

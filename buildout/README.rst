@@ -82,8 +82,21 @@ user will have complete access to everything in Devilry.
 
 Test the install
 ================
-To test that everything works as expected, you can use the Django devserver. First,
-enable debug-mode in your ``devilry_production_settings.py``::
+See :ref:`debug-devilry-problems`.
+
+
+
+.. _debug-devilry-problems:
+
+Debug Devilry problems
+======================
+
+To test that everything works as expected, you can use the Django devserver in
+DEBUG-mode. The devserver serves static files, so you do not need a webserver.
+It does not use SSL, so be VERY careful when running it on an extrnal NIC (like
+the example with ``0.0.0.0`` below).
+
+First, enable debug-mode in your ``devilry_production_settings.py``::
 
     DEBUG = True
 
@@ -113,6 +126,30 @@ Collect all static files in the ``static/``-subdirectory::
     $ bin/django.py collectstatic
 
 
+Make sure all services work as excpected
+----------------------------------------
+All Devilry services except for the webserver that serves static files and
+handles SSL is controlled to Supervisord.
+
+To run supervisord in the foreground for testing/debugging, enable DEBUG-mode
+(see :ref:`debug-devilry-problems`), and  run::
+
+    $ bin/supervisord -n
+
+Make sure you disable DEBUG-mode afterwards.
+
+
+Run supervisord for production
+-------------------------------
+
+To run supervisord in the background with a PID, run::
+
+    $ bin/supervisord
+
+See :ref:`supervisord-configure` to see and configure where the PID-file is
+written.
+
+
 
 Update devilry
 ==============
@@ -124,3 +161,46 @@ Update devilry
 
        $ bin/buildout "buildout:parts=download-devilryrepo" && bin/buildout
        $ bin/django.py collectstatic --noinput
+
+
+
+
+.. _supervisord-configure:
+
+Configure supervisord (logging, pidfile, ...)
+=============================================
+We handle all logging through Supervisord, so you will probably at least want
+to configure where we log to.
+
+You configure supervisord through your ``buildout.cfg``. Add a
+``supervisor``-section, and tune the settings::
+
+    [supervisor]
+    # The full path to the supervisord log file.
+    # Defaults to /path/to/devilrybuild/var/log/supervisord.log
+    #logfile = 
+
+    # The full path of the directory where log files of processes managed by
+    # Supervisor while be stored. Defaults to /path/to/devilrybuild/var/log
+    #childlogdir =
+
+    # The pid file of supervisord. Defaults to
+    # /path/to/devilrybuild/var/supervisord.pid
+    #pidfile =
+
+    # The maximum number of bytes that may be consumed by the activity log file
+    # before it is rotated. Defaults to 50MB.
+    #logfile-maxbytes =
+
+    # The number of backups to keep around resulting from activity log file
+    # rotation. Defaults to 30.
+    #logfile-backups = 
+
+Rebuild the Supervisord config (output in ``parts/supervisor/supervisord.conf``)::
+
+    $ bin/buildout
+
+And restart supervisord.
+
+See the `Buildout recipe <http://pypi.python.org/pypi/collective.recipe.supervisor/>`_
+and the `Supervisord docs <http://supervisord.org/>`_ for more details.
