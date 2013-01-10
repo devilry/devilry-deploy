@@ -1,0 +1,9 @@
+.DS_Store
+.Python
+bin/
+buildoutcache/
+develop-eggs/
+include/
+lib/
+parts/
+static/

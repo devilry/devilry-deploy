@@ -15,3 +15,4 @@ Session.vim
 .installed.cfg
 .mr.developer.cfg
 vagrant/.vagrant
+.DS_Store
