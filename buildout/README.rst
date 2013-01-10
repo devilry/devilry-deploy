@@ -128,8 +128,8 @@ Collect all static files in the ``static/``-subdirectory::
 
 Make sure all services work as excpected
 ----------------------------------------
-All Devilry services except for the webserver that serves static files and
-handles SSL is controlled to Supervisord.
+All Devilry services is controlled to Supervisord. This does not include your
+database or webserver.
 
 To run supervisord in the foreground for testing/debugging, enable DEBUG-mode
 (see :ref:`debug-devilry-problems`), and  run::
@@ -139,7 +139,7 @@ To run supervisord in the foreground for testing/debugging, enable DEBUG-mode
 Make sure you disable DEBUG-mode afterwards.
 
 
-Run supervisord for production
+Run Supervisord for production
 -------------------------------
 
 To run supervisord in the background with a PID, run::
@@ -148,6 +148,51 @@ To run supervisord in the background with a PID, run::
 
 See :ref:`supervisord-configure` to see and configure where the PID-file is
 written.
+
+
+Configure your webserver
+------------------------
+You need to configure your webserver to act as a reverse proxy for all URLS
+except for the ``/static/``-url. The proxy should forward requests to the
+Devilry WSGI server (gunicorn). Gunicorn runs  on ``127.0.0.0:8002``.
+
+The webserver should use SSL.
+
+
+Configure Nginx
+---------------
+For Nginx, you should use something like this (not a complete config file, just
+the location sections that you should add to your config)::
+
+    location /static {
+        # Show directory index.
+        autoindex  on;
+
+        # NOTE from: http://wiki.nginx.org/HttpCoreModule#root
+        # Keep in mind that the root will still append the directory
+        # to the request so that a request for "/i/top.gif" will not look
+        # in "/spool/w3/top.gif" like might happen in an Apache-like alias
+        # configuration where the location match itself is dropped. Use the
+        # alias directive to achieve the Apache-like functionality.
+        root /path/to/devilrybuild;
+    }
+
+    location / {
+        proxy_pass       http://127.0.0.1:8002;
+        proxy_set_header Host $host:$server_port;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-DEVILRY_USE_EXTJS true;
+
+        # SSL options
+        proxy_set_header X-FORWARDED-PROTOCOL ssl;
+        proxy_set_header X-FORWARDED-SSL on;
+        proxy_headers_hash_max_size 1024;
+        proxy_headers_hash_bucket_size 256;
+        proxy_set_header X-Forwarded-Proto https;
+    }
+
+We recommend Nginx because it is fast, lightweight, secure and easy to setup.
 
 
 
