@@ -20,10 +20,10 @@ compatible Python interpreter to run. The virtualenv is not affected by
 other Python packages installed globally::
 
     $ cd devilry/
-    $ virtualenv --no-site-packages .
     $ mkdir -p buildoutcache/dlcache
+    $ virtualenv --no-site-packages .
     $ bin/easy_install zc.buildout
-    $ bin/buildout
+    $ bin/buildout "buildout:parts=download-devilryrepo" && bin/buildout
 
 Because everything in ``devilry/`` is generated from your ``buildout.cfg``,
 which refers to a specific revision of the Devilry repository, you can safely
@@ -40,4 +40,4 @@ Update devilry
    ``rev`` is a GIT devision ID.
 2. Run buildout::
 
-       $ bin/buildout
+       bin/buildout "buildout:parts=download-devilryrepo" && bin/buildout
