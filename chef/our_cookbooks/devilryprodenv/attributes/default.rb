@@ -1,0 +1,6 @@
+node.default["devilryprodenv"]["git_branch_or_ref"] = "master"
+node.default["devilryprodenv"]["username"] = "devilryrunner"
+node.default["devilryprodenv"]["groupname"] = "devilryrunner"
+node.default["devilryprodenv"]["homedir"] = "/home/#{node.devilryprodenv.username}"
+node.default["devilryprodenv"]["prodenvname"] = "default"
+node.default["devilryprodenv"]["prodenvdir"] = "#{node.devilryprodenv.homedir}/devilry/prodenv_#{node.devilryprodenv.prodenvname}"

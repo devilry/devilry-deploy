@@ -1,0 +1,35 @@
+{
+    "name": "prodserver",
+    "description": "Install and set up everything needed for a production server.",
+    "json_class": "Chef::Role",
+    "chef_type": "role",
+
+    "default_attributes": {
+      "devilryprodenv": {
+          "git_branch_or_ref": "master"
+      },
+      "postgresql": {
+        "password": {
+          "postgres": "extrasecret"
+        },
+        "config": {
+          "listen_addresses": "localhost"
+        }
+      },
+      "django_postgresql": {
+        "dbname": "djangodb",
+        "username": "djangouser",
+        "password": "supersecret"
+      }
+    },
+    "override_attributes": { },
+
+    "run_list": [
+        "recipe[apt::default]",
+        "recipe[postgresql::client]",
+        "recipe[postgresql::server]",
+        "recipe[django_postgresql]",
+        "recipe[devilryprodenv]",
+        "recipe[supervisord_rungunicorn]"
+    ]
+}

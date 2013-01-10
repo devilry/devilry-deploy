@@ -1,0 +1,17 @@
+*.class
+*.o
+*.pyc
+*.pyo
+*.tmp
+.*.swp
+.*.swo
+*~
+*.sqlite3
+*.bak
+*.egg-info/
+Session.vim
+\#*#
+.#*
+.installed.cfg
+.mr.developer.cfg
+vagrant/.vagrant
