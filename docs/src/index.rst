@@ -4,10 +4,11 @@ Devilry deployment docs
 Deployment docs and scripts for `Devilry <http://devilry.org>`_.
 
 .. note::
-    You can contribute to these docs by forkink the `git-repo at github
-    <https://github.com/devilry/devilry-deploy>`_, and sending pull requests
-    with your changes. You can also submit issues with these docs via the github
-    project page.
+    You can contribute to these docs.
+    Use the *Edit on GitHub* or *Show on GitHub* link in the sidebar.
+
+    You can also submit issues with these docs via
+    `our github project page <https://github.com/devilry/devilry-deploy/issues>`_.
 
 Contents:
 
