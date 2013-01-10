@@ -115,6 +115,10 @@ To run supervisord in the background with a PID, run::
 See :ref:`supervisord-configure` to see and configure where the PID-file is
 written.
 
+.. warning::
+    Do NOT run supervisord as root. Run it as an unpriviledged used, preferably
+    a user that is only used for Devilry.
+
 
 Configure your webserver
 ------------------------

@@ -7,3 +7,7 @@ cookbooks to Librarian, add them to ``Cheffile``, and run::
     $ librarian-chef install
 
 Refer to the Librarian docs for details, and install instructions.
+
+.. note::
+    We include the cookbooks in the repo even though we use Librarian.
+    This is to avoid having to install Librarian to deploy.
