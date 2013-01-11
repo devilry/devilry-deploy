@@ -11,6 +11,6 @@ bash "devilry_dev_autodb" do
   user "#{username}"
   cwd "#{devilrybuild_dir}"
   code <<-EOH
-  bin/django.py dev_autodb
+  bin/django.py dev_autodb > /tmp/devilrydemo-dev_autodb.log
   EOH
 end

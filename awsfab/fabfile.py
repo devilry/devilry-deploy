@@ -35,15 +35,15 @@ def _create_chefsolo_cachedir():
     sudo('mkdir -p /tmp/chef-solo-cache')
 
 
-def _rsync_deploydir():
+@task
+def rsync_deploydir():
     """
-    Creates a tempdir, and rsyncs the ``/reporoot/deploy/`` dir into it
-    (excluding deploy/awsfab).
+    Creates a tempdir, and rsyncs the ``/reporoot/chef/`` dir into it.
     """
     _create_remote_tempdir()
     ec2_rsync_upload(LOCAL_CHEFDIR, REMOTE_CHEFDIR,
                      sync_content=True,
-                     rsync_args=('-av --delete --exclude awsfab/ --delete-excluded'))
+                     rsync_args=('-av --delete'))
 
 @task
 def chef_deploy(nodeconf):
@@ -71,10 +71,18 @@ def chef_deploy(nodeconf):
         abort('Aborted')
 
     # The actual deploy code
-    _rsync_deploydir()
+    rsync_deploydir()
     _create_chefsolo_cachedir()
     with cd(REMOTE_CHEFDIR):
-        sudo('chef-solo -c chefsolo.rb -j nodes/{0}'.format(nodeconf))
+        sudo('chef-solo -c {chefdir}/chefsolo.rb -j {chefdir}/nodes/{nodeconf}'.format(chefdir=REMOTE_CHEFDIR, nodeconf=nodeconf))
+
+    print 'Deploy of {nametag} complete. Visit the instance at:'.format(**vars())
+    print
+    print '    http://{0}'.format(instancewrapper.instance.public_dns_name)
+    print
+    print 'Login with:'
+    print '   username: grandma'
+    print '   password: test'
 
 
 @task

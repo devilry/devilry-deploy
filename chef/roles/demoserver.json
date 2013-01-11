@@ -65,7 +65,7 @@
         "recipe[django_postgresql::dropdb]",
         "recipe[django_postgresql]",
         "recipe[devilryprodenv]",
-        "recipe[devilrydemo::creategrandma]",
+        "recipe[devilrydemo]",
         "recipe[django_nginx]"
     ]
 }
