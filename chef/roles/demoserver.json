@@ -18,6 +18,13 @@
         "username": "djangouser",
         "password": "supersecret"
       },
+      "nginx": {
+        "worker_processes": 4,
+        "default_site_enabled": false
+      },
+      "django_nginx": {
+        "statichome": "/home/devilryrunner/devilrybuild"
+      },
       "devilryprodenv": {
         "devilry_version": "master",
         "supervisor": {
@@ -37,7 +44,7 @@
           },
           "settings": {
             "SECRET_KEY": "+g$%**q(w78xqa_2)(_+%v8d)he-b_^@d*pqhq!#2p*a7*9e9h",
-            "DEBUG": true,
+            "DEBUG": false,
             "DEVILRY_SYNCSYSTEM": "The Devilry demo syncsystem"
           },
           "extra_installed_apps": [
@@ -58,6 +65,7 @@
         "recipe[django_postgresql::dropdb]",
         "recipe[django_postgresql]",
         "recipe[devilryprodenv]",
-        "recipe[devilrydemo::creategrandma]"
+        "recipe[devilrydemo::creategrandma]",
+        "recipe[django_nginx]"
     ]
 }

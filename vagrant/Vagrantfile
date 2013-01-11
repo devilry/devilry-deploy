@@ -30,13 +30,16 @@ Vagrant::Config.run do |config|
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
   config.vm.forward_port 80, 8080
+
+  # We serve gunicorn on 8002 port - open it for debugging
   config.vm.forward_port 8002, 18002
+
+  # We configure nginx to run on port 9090 below - forward the port to make it available
+  config.vm.forward_port 9090, 9090
 
   # MySQL server
   #config.vm.forward_port 3306, 3306
 
-  ## We serve gunicorn on this port - open it for debugging
-  #config.vm.forward_port 9000, 9000
 
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the
@@ -53,7 +56,11 @@ Vagrant::Config.run do |config|
     chef.data_bags_path = "../chef/data_bags"
     chef.add_role "demoserver"
   
-    # You may also specify custom JSON attributes:
-    #chef.json = { :mysql_password => "foo" }
+    # Make nginx serve django on port 9090:
+    chef.json = {
+        :django_nginx => {
+            :listenaddr => 9090
+        }
+    }
   end
 end
