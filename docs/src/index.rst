@@ -22,6 +22,7 @@ Contents:
    update
    nginx
    specifyversion
+   awsfab
 
 Indices and tables
 ==================

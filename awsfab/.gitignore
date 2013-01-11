@@ -1,1 +1,6 @@
 awsfab_settings_local.py
+.Python
+bin/
+include/
+lib/
+parts/

@@ -46,7 +46,7 @@ def _rsync_deploydir():
                      rsync_args=('-av --delete --exclude awsfab/ --delete-excluded'))
 
 @task
-def deploy(nodeconf):
+def chef_deploy(nodeconf):
     """
     Deploy the specified ``nodeconf``.
 
