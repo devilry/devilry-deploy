@@ -11,6 +11,17 @@ package "git"               # Required to check out sources from the repo
 username = "#{node.devilryprodenv.username}"
 groupname = "#{node.devilryprodenv.groupname}"
 homedir = "#{node.devilryprodenv.homedir}"
+init_script = "/etc/init.d/devilry-supervisord"
+
+
+#
+# Stop the Devilry services
+# - ignored if this is the first time we run the recipe and the init-script
+#   does not exist.
+#
+service "devilry-supervisord" do
+  action [ :stop ]
+end
 
 
 #
@@ -127,7 +138,7 @@ end
 #
 # Create init script
 #
-template "/etc/init.d/devilry-supervisord" do
+template "#{init_script}" do
   source "etc/init.d/devilry-supervisord.erb"
   owner "#{username}"
   group "#{groupname}"
@@ -141,6 +152,5 @@ end
 
 # Enable the service (make it start at boot), and restart
 service "devilry-supervisord" do
-  supports :status => true, :restart => true, :reload => false
-  action [ :enable, :restart ]
+  action [ :enable, :start ]
 end
