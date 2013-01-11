@@ -26,7 +26,10 @@ Create a configuration file named ``buildout.cfg`` in the directory. Add the
 following to the configuration file::
 
     [buildout]
-    extends = buildout-base.cfg
+    extends = https://raw.github.com/devilry/devilry-deploy/REVISION/buildout/buildout-base.cfg
+
+Replace ``REVISION`` (in the extends url) with the Devilry version you want to
+use (E.g.: ``1.2.1``), or the GIT commit ID.
 
 
 Install required system packages

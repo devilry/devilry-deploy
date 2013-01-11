@@ -2,32 +2,23 @@
 #
 # System packages required by devilry
 #
-package "build-essential"   # Required to compile python c/c++ modules (like Pillow)
-package "python-dev"        # Required to compile python c/c++ modules (like Pillow)
-package "libjpeg62-dev"     # Required by PIL (Pillow)
-package "zlib1g-dev"        # Required by PIL (Pillow)
-package "libfreetype6-dev"  # Required by PIL (Pillow)
-package "liblcms1-dev"      # Required by PIL (Pillow)
+package "build-essential"   # Required to compile python c/c++ modules (like psycopg2)
+package "python-dev"        # Required to compile python c/c++ modules (like psycopg2)
 package "python-virtualenv" # Required to create a virtualenv in virtualenv_buildout
 package "git"               # Required to check out sources from the repo
-#package "sqlite3"           # Needed to backup sqlite databases
-package "s3cmd"             # Needed to copy backups to S3
 
 
 username = "#{node.devilryprodenv.username}"
 groupname = "#{node.devilryprodenv.groupname}"
 homedir = "#{node.devilryprodenv.homedir}"
-prodenvdir = "#{node.devilryprodenv.prodenvdir}"
 
 
 #
 # Create the #{username} group, user and home directory
 #
-
 group "#{username}" do
     system false
 end
-
 user "#{username}" do
   comment "User that runs the devilry server"
   gid "#{username}"
@@ -35,7 +26,6 @@ user "#{username}" do
   shell "/bin/bash"
   # Note: We do not set a password for the user - we login using "su #{username}" from the system user.
 end
-
 directory "#{homedir}" do
   owner "#{username}"
   group "#{groupname}"
@@ -45,35 +35,83 @@ end
 
 
 
+
+
 #
-# Clone devilry git repo into $HOME/devilry/
+# Create the devilrybuild directory and buildout.cfg
 #
-git "#{homedir}/devilry" do
-  repository "https://github.com/devilry/devilry-django.git"
-  reference "#{node.devilryprodenv.git_branch_or_ref}" # The branch, tag or commitID to check out
-  action :sync # Update the source to the specified revision, or get a new clone/checkout
-  user "#{username}" # System user to own the checked out code
-  group "#{groupname}" # System group to own the checked out code
+devilrybuild = "#{homedir}/devilrybuild"
+directory "#{devilrybuild}" do
+  owner "#{username}"
+  group "#{groupname}"
+  mode "0755"
+  action :create
+end
+template "#{homedir}/devilrybuild/buildout.cfg" do
+  source "buildout.cfg.erb"
+  owner "#{username}"
+  group "#{groupname}"
+  mode "0644"
+  variables({
+    :devilry_version => "#{node.devilryprodenv.devilry_version}"
+  })
 end
 
 
 #
-# Create:
-# - a virtualenv (for a completely clean and protected environment).
-# - initialize and run bootstrap
-#       - Downloads all dependencies
-#       - Creates a wrapper for Django manage.py that uses the virtualenv for
-#         the python executable and bootstrap dependencies as PYTHONPATH.
+# Create /etc/devilry
 #
-script "clean_virtualenv_buildout" do
-  interpreter "bash"
-  user "#{username}"
-  cwd "#{prodenvdir}"
-  code <<-EOH
-  rm -rf venv
-  virtualenv venv
-  venv/bin/python ../bootstrap.py -d
-  bin/buildout
-  bin/django.py collectstatic --noinput
-  EOH
+directory "/etc/devilry" do
+  owner "root"
+  mode "0755"
+  action :create
 end
+template "/etc/devilry/__init__.py" do
+  source "etc/devilry/__init__.py.erb"
+  owner "root"
+  mode "0644"
+end
+template "/etc/devilry/devilry_production_settings.py" do
+  source "etc/devilry/devilry_production_settings.py.erb"
+  owner "root"
+  mode "0644"
+  variables({
+    :secret_key=> "#{node.devilryprodenv.settings.SECRET_KEY}",
+    :debug=> "#{node.devilryprodenv.settings.DEBUG}",
+    :dbbackend=> "#{node.devilryprodenv.settings.DBBACKEND}",
+    :dbname=> "#{node.devilryprodenv.settings.DBNAME}",
+    :dbuser=> "#{node.devilryprodenv.settings.DBUSER}",
+    :dbpassword=> "#{node.devilryprodenv.settings.DBPASSWORD}",
+    :dbhost=> "#{node.devilryprodenv.settings.DBHOST}",
+    :dbport=> "#{node.devilryprodenv.settings.DBPORT}",
+    :syncsystem=> "#{node.devilryprodenv.settings.DEVILRY_SYNCSYSTEM}",
+    :deliverystore_root=> "#{node.devilryprodenv.settings.DEVILRY_FSHIERDELIVERYSTORE_ROOT}",
+    :use_university_terms=> "#{node.devilryprodenv.settings.USE_UNIVERSITY_TERMS}"
+  })
+end
+
+
+#
+# Create directory for the files uploaded by students
+#
+directory "/devilry-filestorage" do
+  owner "#{username}"
+  group "#{groupname}"
+  mode "0755"
+  action :create
+end
+
+
+
+#script "clean_virtualenv_buildout" do
+  #interpreter "bash"
+  #user "#{username}"
+  #cwd "#{devilrybuild}"
+  #code <<-EOH
+  
+  #virtualenv venv
+  #venv/bin/python ../bootstrap.py -d
+  #bin/buildout
+  #bin/django.py collectstatic --noinput
+  #EOH
+#end
