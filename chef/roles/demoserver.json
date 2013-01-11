@@ -1,6 +1,6 @@
 {
     "name": "prodserver",
-    "description": "Install and set up everything needed for a production server.",
+    "description": "Install and set up everything needed for a demo server.",
     "json_class": "Chef::Role",
     "chef_type": "role",
 
@@ -28,6 +28,7 @@
           "workers": "4"
         },
         "devilry": {
+          "use_insecure_fast_passwordhasher": true,
           "database": {
             "NAME": "djangodb",
             "USER": "djangouser",
@@ -38,7 +39,13 @@
             "SECRET_KEY": "+g$%**q(w78xqa_2)(_+%v8d)he-b_^@d*pqhq!#2p*a7*9e9h",
             "DEBUG": true,
             "DEVILRY_SYNCSYSTEM": "The Devilry demo syncsystem"
-          }
+          },
+          "extra_installed_apps": [
+            "devilry_sandbox"
+          ],
+          "extra_urls": [
+            "url(r'^devilry_sandbox/', include('devilry_sandbox.urls'))"
+          ]
         }
       }
     },
@@ -48,7 +55,9 @@
         "recipe[apt::default]",
         "recipe[postgresql::client]",
         "recipe[postgresql::server]",
+        "recipe[django_postgresql::dropdb]",
         "recipe[django_postgresql]",
-        "recipe[devilryprodenv]"
+        "recipe[devilryprodenv]",
+        "recipe[devilrydemo::creategrandma]"
     ]
 }

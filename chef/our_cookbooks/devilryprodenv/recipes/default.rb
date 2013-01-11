@@ -11,6 +11,7 @@ package "git"               # Required to check out sources from the repo
 username = "#{node.devilryprodenv.username}"
 groupname = "#{node.devilryprodenv.groupname}"
 homedir = "#{node.devilryprodenv.homedir}"
+devilrybuild_dir = "#{node.devilryprodenv.devilrybuild_dir}"
 init_service_name = "#{node.devilryprodenv.supervisord_servicename}"
 init_script = "/etc/init.d/#{init_service_name}"
 pidfile = "#{homedir}/devilrybuild/var/supervisord.pid"
@@ -86,7 +87,17 @@ template "/etc/devilry/devilry_prod_settings.py" do
   variables({
     :database => node[:devilryprodenv][:devilry][:database],
     :settings => node[:devilryprodenv][:devilry][:settings],
-    :use_university_terms => node[:devilryprodenv][:devilry][:use_university_terms]
+    :use_university_terms => node[:devilryprodenv][:devilry][:use_university_terms],
+    :use_insecure_fast_passwordhasher => node[:devilryprodenv][:devilry][:use_insecure_fast_passwordhasher],
+    :extra_installed_apps => node[:devilryprodenv][:devilry][:extra_installed_apps]
+  })
+end
+template "/etc/devilry/devilry_prod_urls.py" do
+  source "etc/devilry/devilry_prod_urls.py.erb"
+  owner "root"
+  mode "0644"
+  variables({
+    :extra_urls => node[:devilryprodenv][:devilry][:extra_urls]
   })
 end
 
@@ -118,14 +129,13 @@ end
 #
 # Create the devilrybuild directory and buildout.cfg
 #
-devilrybuild = "#{homedir}/devilrybuild"
-directory "#{devilrybuild}" do
+directory "#{devilrybuild_dir}" do
   owner "#{username}"
   group "#{groupname}"
   mode "0755"
   action :create
 end
-template "#{homedir}/devilrybuild/buildout.cfg" do
+template "#{devilrybuild_dir}/buildout.cfg" do
   source "buildout.cfg.erb"
   owner "#{username}"
   group "#{groupname}"
@@ -147,7 +157,7 @@ end
 script "initialize_buildout" do
   interpreter "bash"
   user "#{username}"
-  cwd "#{homedir}/devilrybuild"
+  cwd "#{devilrybuild_dir}"
   code <<-EOH
   mkdir -p buildoutcache/dlcache
   virtualenv --no-site-packages .

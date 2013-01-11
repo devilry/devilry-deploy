@@ -6,6 +6,7 @@ node.default["devilryprodenv"]["devilry_version"] = "latest-stable"
 node.default["devilryprodenv"]["username"] = "devilryrunner"
 node.default["devilryprodenv"]["groupname"] = "devilryrunner"
 node.default["devilryprodenv"]["homedir"] = "/home/#{node.devilryprodenv.username}"
+node.default["devilryprodenv"]["devilrybuild_dir"] = "#{node.devilryprodenv.homedir}/devilrybuild"
 
 # Supervisor
 node.default["devilryprodenv"]["gunicorn"] = {}
@@ -16,5 +17,8 @@ node.default["devilryprodenv"]["supervisor"]["logdir"] = "/var/log/devilry"
 
 # Devilry settings
 node.default["devilryprodenv"]["devilry"]["use_university_terms"] = true
+node.default["devilryprodenv"]["devilry"]["use_insecure_fast_passwordhasher"] = false
 node.default["devilryprodenv"]["devilry"]["database"]["ENGINE"] = "django.db.backends.postgresql_psycopg2"
 node.default["devilryprodenv"]["devilry"]["settings"]["DEVILRY_FSHIERDELIVERYSTORE_ROOT"] = "/devilry-filestorage"
+node.default["devilryprodenv"]["devilry"]["extra_installed_apps"] = []
+node.default["devilryprodenv"]["devilry"]["extra_urls"] = []

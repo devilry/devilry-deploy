@@ -65,6 +65,17 @@ Devilry settings
   settings for the default database.
 - ``node["devilryprodenv"]["devilry"]["database"]["ENGINE"]``
   Defaults to ``"django.db.backends.postgresql_psycopg2"``.
+- ``node["devilryprodenv"]["devilry"]["extra_installed_apps"]``
+  List of extra apps for the ``INSTALLED_APPS``-setting.
+  This list is appended to the default list provided by Devilry.
+- ``node["devilryprodenv"]["devilry"]["extra_urls"]``
+  List of extra url-configs for the Devilry urlconf.
+
+Unsafe settings - leave to their default unless you know what you are doing:
+- ``node["devilryprodenv"]["devilry"]["use_insecure_fast_passwordhasher"]`` - Boolean
+  that configures Devilry to use MD5 password hasher. This should never be
+  used in production, but it is really nice for demos when you need to
+  generate data because it speeds up generating data a log (at least 5x).
 
 
 
