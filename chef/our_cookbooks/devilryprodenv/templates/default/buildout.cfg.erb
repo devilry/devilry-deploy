@@ -1,2 +1,5 @@
 [buildout]
 extends = https://raw.github.com/devilry/devilry-deploy/<%= @devilry_version %>/buildout/buildout-base.cfg
+
+[supervisor]
+supervisord-user = <%= @username %>

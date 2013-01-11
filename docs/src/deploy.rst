@@ -120,7 +120,9 @@ written.
 
 .. warning::
     Do NOT run supervisord as root. Run it as an unpriviledged used, preferably
-    a user that is only used for Devilry.
+    a user that is only used for Devilry. Use the ``supervisord-user``, as shown
+    in :ref:`supervisord-configure`, to define a user if running supervisord as
+    root.
 
 
 Configure your webserver

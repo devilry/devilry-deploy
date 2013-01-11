@@ -97,7 +97,8 @@ template "#{homedir}/devilrybuild/buildout.cfg" do
   group "#{groupname}"
   mode "0644"
   variables({
-    :devilry_version => "#{node.devilryprodenv.devilry_version}"
+    :devilry_version => "#{node.devilryprodenv.devilry_version}",
+    :username => "#{username}"
   })
 end
 
@@ -118,4 +119,28 @@ script "initialize_buildout" do
   bin/django.py syncdb --noinput
   bin/django.py collectstatic --noinput
   EOH
+end
+
+
+
+
+#
+# Create init script
+#
+template "/etc/init.d/devilry-supervisord" do
+  source "etc/init.d/devilry-supervisord.erb"
+  owner "#{username}"
+  group "#{groupname}"
+  mode "0755"
+  variables({
+    :username => "#{username}",
+    :daemon => "#{homedir}/devilrybuild/bin/supervisord",
+    :pidfile => "#{homedir}/devilrybuild/var/supervisord.pid"
+  })
+end
+
+# Enable the service (make it start at boot), and restart
+service "devilry-supervisord" do
+  supports :status => true, :restart => true, :reload => false
+  action [ :enable, :restart ]
 end

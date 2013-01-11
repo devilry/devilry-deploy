@@ -30,6 +30,11 @@ You configure supervisord through your ``buildout.cfg``. Add a
     # rotation. Defaults to 30.
     #logfile-backups = 
 
+    # If supervisord is run as the root user, switch users to this UNIX user
+    # account before doing any meaningful processing. This value has no effect if
+    # supervisord is not run as root.
+    supervisord-user =
+
 Rebuild the Supervisord config (output in ``parts/supervisor/supervisord.conf``)::
 
     $ bin/buildout
