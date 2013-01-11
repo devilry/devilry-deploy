@@ -19,11 +19,25 @@
         "password": "supersecret"
       },
       "devilryprodenv": {
-        "settings": {
-          "SECRET_KEY": "+g$%**q(w78xqa_2)(_+%v8d)he-b_^@d*pqhq!#2p*a7*9e9h",
-          "DBNAME": "djangodb",
-          "DBUSER": "djangouser",
-          "DBPASSWORD": "supersecret"
+        "supervisor": {
+          "logfile-backups": 10
+        },
+        "gunicorn": {
+          "address": "0.0.0.0",
+          "workers": "4"
+        },
+        "devilry": {
+          "database": {
+            "NAME": "djangodb",
+            "USER": "djangouser",
+            "PASSWORD": "supersecret",
+            "HOST": "localhost"
+          },
+          "settings": {
+            "SECRET_KEY": "+g$%**q(w78xqa_2)(_+%v8d)he-b_^@d*pqhq!#2p*a7*9e9h",
+            "DEBUG": true,
+            "DEVILRY_SYNCSYSTEM": "The Devilry demo syncsystem"
+          }
         }
       }
     },

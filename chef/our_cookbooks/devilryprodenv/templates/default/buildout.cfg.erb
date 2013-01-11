@@ -2,8 +2,13 @@
 extends = https://raw.github.com/devilry/devilry-deploy/<%= @devilry_version %>/buildout/buildout-base.cfg
 
 [supervisor]
-supervisord-user = <%= @username %>
+<% @supervisor.each_pair do |name, value| -%>
+<%= "#{name} = #{value}" %>
+<% end -%>
 pidfile = <%= @pidfile %>
+supervisord-user = <%= @username %>
 
 [gunicorn]
-args = run_gunicorn -b 0.0.0.0:8002 -w ${gunicorn:workers}
+<% @gunicorn.each_pair do |name, value| -%>
+<%= "#{name} = #{value}" %>
+<% end -%>

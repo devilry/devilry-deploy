@@ -84,17 +84,9 @@ template "/etc/devilry/devilry_prod_settings.py" do
   owner "root"
   mode "0644"
   variables({
-    :secret_key=> "#{node.devilryprodenv.settings.SECRET_KEY}",
-    :debug=> "#{node.devilryprodenv.settings.DEBUG}",
-    :dbbackend=> "#{node.devilryprodenv.settings.DBBACKEND}",
-    :dbname=> "#{node.devilryprodenv.settings.DBNAME}",
-    :dbuser=> "#{node.devilryprodenv.settings.DBUSER}",
-    :dbpassword=> "#{node.devilryprodenv.settings.DBPASSWORD}",
-    :dbhost=> "#{node.devilryprodenv.settings.DBHOST}",
-    :dbport=> "#{node.devilryprodenv.settings.DBPORT}",
-    :syncsystem=> "#{node.devilryprodenv.settings.DEVILRY_SYNCSYSTEM}",
-    :deliverystore_root=> "#{node.devilryprodenv.settings.DEVILRY_FSHIERDELIVERYSTORE_ROOT}",
-    :use_university_terms=> "#{node.devilryprodenv.settings.USE_UNIVERSITY_TERMS}"
+    :database => node[:devilryprodenv][:devilry][:database],
+    :settings => node[:devilryprodenv][:devilry][:settings],
+    :use_university_terms => node[:devilryprodenv][:devilry][:use_university_terms]
   })
 end
 
@@ -102,7 +94,7 @@ end
 #
 # Create directory for the files uploaded by students
 #
-directory "#{node.devilryprodenv.settings.DEVILRY_FSHIERDELIVERYSTORE_ROOT}" do
+directory "#{node.devilryprodenv.devilry.settings.DEVILRY_FSHIERDELIVERYSTORE_ROOT}" do
   owner "#{username}"
   group "#{groupname}"
   mode "0755"
@@ -130,7 +122,9 @@ template "#{homedir}/devilrybuild/buildout.cfg" do
   variables({
     :devilry_version => "#{node.devilryprodenv.devilry_version}",
     :username => "#{username}",
-    :pidfile => "#{pidfile}"
+    :pidfile => "#{pidfile}",
+    :supervisor => node[:devilryprodenv][:supervisor],
+    :gunicorn => node[:devilryprodenv][:gunicorn]
   })
 end
 
