@@ -10,13 +10,9 @@ You configure supervisord through your ``buildout.cfg``. Add a
 ``supervisor``-section, and tune the settings::
 
     [supervisor]
-    # The full path to the supervisord log file.
-    # Defaults to /path/to/devilrybuild/var/log/supervisord.log
-    #logfile = 
-
-    # The full path of the directory where log files of processes managed by
-    # Supervisor while be stored. Defaults to /path/to/devilrybuild/var/log
-    #childlogdir =
+    # The full path to the supervisord log directory.
+    # Defaults to /path/to/devilrybuild/var/log/
+    #logdir = 
 
     # The pid file of supervisord. Defaults to
     # /path/to/devilrybuild/var/supervisord.pid
