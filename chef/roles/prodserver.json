@@ -19,6 +19,7 @@
         "password": "supersecret"
       },
       "devilryprodenv": {
+        "devilry_version": "master",
         "supervisor": {
           "logfile-backups": 10
         },

@@ -21,6 +21,7 @@ Contents:
    debug
    update
    nginx
+   specifyversion
 
 Indices and tables
 ==================

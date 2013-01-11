@@ -11,7 +11,7 @@ package "git"               # Required to check out sources from the repo
 username = "#{node.devilryprodenv.username}"
 groupname = "#{node.devilryprodenv.groupname}"
 homedir = "#{node.devilryprodenv.homedir}"
-init_service_name = "supervisord"
+init_service_name = "#{node.devilryprodenv.supervisord_servicename}"
 init_script = "/etc/init.d/#{init_service_name}"
 pidfile = "#{homedir}/devilrybuild/var/supervisord.pid"
 
@@ -101,6 +101,17 @@ directory "#{node.devilryprodenv.devilry.settings.DEVILRY_FSHIERDELIVERYSTORE_RO
   action :create
 end
 
+
+
+#
+# Create the logdir
+#
+directory "#{node.devilryprodenv.supervisor.logdir}" do
+  owner "#{username}"
+  group "#{groupname}"
+  mode "0755"
+  action :create
+end
 
 
 

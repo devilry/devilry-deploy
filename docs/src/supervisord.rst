@@ -12,6 +12,8 @@ You configure supervisord through your ``buildout.cfg``. Add a
     [supervisor]
     # The full path to the supervisord log directory.
     # Defaults to /path/to/devilrybuild/var/log/
+    # Note: This setting is added by our buildout-base.cfg, and not by the
+    #       supervisor buildout recipe.
     #logdir = 
 
     # The pid file of supervisord. Defaults to

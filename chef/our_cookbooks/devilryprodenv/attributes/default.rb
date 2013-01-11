@@ -1,5 +1,5 @@
 # The branch, tag or commitID to check out
-node.default["devilryprodenv"]["devilry_version"] = "master"
+node.default["devilryprodenv"]["devilry_version"] = "latest-stable"
 
 
 # The username and group
@@ -9,7 +9,10 @@ node.default["devilryprodenv"]["homedir"] = "/home/#{node.devilryprodenv.usernam
 
 # Supervisor
 node.default["devilryprodenv"]["gunicorn"] = {}
+node.default["devilryprodenv"]["supervisord_servicename"] = "supervisord"
 node.default["devilryprodenv"]["supervisor"] = {}
+node.default["devilryprodenv"]["supervisor"]["pidfile"] = "/var/run/#{node.devilryprodenv.supervisord_servicename}.pid"
+node.default["devilryprodenv"]["supervisor"]["logdir"] = "/var/log/devilry"
 
 # Devilry settings
 node.default["devilryprodenv"]["devilry"]["use_university_terms"] = true
