@@ -23,6 +23,7 @@ Contents:
    nginx
    specifyversion
    awsfab
+   vagrant
 
 Indices and tables
 ==================
