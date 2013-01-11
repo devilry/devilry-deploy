@@ -3,6 +3,7 @@ extends = https://raw.github.com/devilry/devilry-deploy/<%= @devilry_version %>/
 
 [supervisor]
 supervisord-user = <%= @username %>
+pidfile = <%= @pidfile %>
 
 [gunicorn]
 args = run_gunicorn -b 0.0.0.0:8002 -w ${gunicorn:workers}

@@ -11,7 +11,26 @@ package "git"               # Required to check out sources from the repo
 username = "#{node.devilryprodenv.username}"
 groupname = "#{node.devilryprodenv.groupname}"
 homedir = "#{node.devilryprodenv.homedir}"
-init_script = "/etc/init.d/devilry-supervisord"
+init_service_name = "supervisord"
+init_script = "/etc/init.d/#{init_service_name}"
+pidfile = "#{homedir}/devilrybuild/var/supervisord.pid"
+
+
+#
+# Create init script
+#
+template "#{init_script}" do
+  source "etc/init.d/supervisord.erb"
+  owner "#{username}"
+  group "#{groupname}"
+  mode "0755"
+  variables({
+    :username => "#{username}",
+    :daemon => "#{homedir}/devilrybuild/bin/supervisord",
+    :pidfile => "#{pidfile}",
+    :init_service_name => "#{init_service_name}"
+  })
+end
 
 
 #
@@ -19,7 +38,8 @@ init_script = "/etc/init.d/devilry-supervisord"
 # - ignored if this is the first time we run the recipe and the init-script
 #   does not exist.
 #
-service "devilry-supervisord" do
+service "#{init_service_name}" do
+  only_if = "test -e #{pidfile}"
   action [ :stop ]
 end
 
@@ -109,7 +129,8 @@ template "#{homedir}/devilrybuild/buildout.cfg" do
   mode "0644"
   variables({
     :devilry_version => "#{node.devilryprodenv.devilry_version}",
-    :username => "#{username}"
+    :username => "#{username}",
+    :pidfile => "#{pidfile}"
   })
 end
 
@@ -135,22 +156,7 @@ end
 
 
 
-#
-# Create init script
-#
-template "#{init_script}" do
-  source "etc/init.d/devilry-supervisord.erb"
-  owner "#{username}"
-  group "#{groupname}"
-  mode "0755"
-  variables({
-    :username => "#{username}",
-    :daemon => "#{homedir}/devilrybuild/bin/supervisord",
-    :pidfile => "#{homedir}/devilrybuild/var/supervisord.pid"
-  })
-end
-
 # Enable the service (make it start at boot), and restart
-service "devilry-supervisord" do
+service "#{init_service_name}" do
   action [ :enable, :start ]
 end
