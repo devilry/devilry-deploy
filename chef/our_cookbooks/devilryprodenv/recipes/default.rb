@@ -35,6 +35,50 @@ end
 
 
 
+#
+# Create /etc/devilry
+#
+directory "/etc/devilry" do
+  owner "root"
+  mode "0755"
+  action :create
+end
+template "/etc/devilry/__init__.py" do
+  source "etc/devilry/__init__.py.erb"
+  owner "root"
+  mode "0644"
+end
+template "/etc/devilry/devilry_prod_settings.py" do
+  source "etc/devilry/devilry_prod_settings.py.erb"
+  owner "root"
+  mode "0644"
+  variables({
+    :secret_key=> "#{node.devilryprodenv.settings.SECRET_KEY}",
+    :debug=> "#{node.devilryprodenv.settings.DEBUG}",
+    :dbbackend=> "#{node.devilryprodenv.settings.DBBACKEND}",
+    :dbname=> "#{node.devilryprodenv.settings.DBNAME}",
+    :dbuser=> "#{node.devilryprodenv.settings.DBUSER}",
+    :dbpassword=> "#{node.devilryprodenv.settings.DBPASSWORD}",
+    :dbhost=> "#{node.devilryprodenv.settings.DBHOST}",
+    :dbport=> "#{node.devilryprodenv.settings.DBPORT}",
+    :syncsystem=> "#{node.devilryprodenv.settings.DEVILRY_SYNCSYSTEM}",
+    :deliverystore_root=> "#{node.devilryprodenv.settings.DEVILRY_FSHIERDELIVERYSTORE_ROOT}",
+    :use_university_terms=> "#{node.devilryprodenv.settings.USE_UNIVERSITY_TERMS}"
+  })
+end
+
+
+#
+# Create directory for the files uploaded by students
+#
+directory "#{node.devilryprodenv.settings.DEVILRY_FSHIERDELIVERYSTORE_ROOT}" do
+  owner "#{username}"
+  group "#{groupname}"
+  mode "0755"
+  action :create
+end
+
+
 
 
 #
@@ -58,60 +102,20 @@ template "#{homedir}/devilrybuild/buildout.cfg" do
 end
 
 
-#
-# Create /etc/devilry
-#
-directory "/etc/devilry" do
-  owner "root"
-  mode "0755"
-  action :create
-end
-template "/etc/devilry/__init__.py" do
-  source "etc/devilry/__init__.py.erb"
-  owner "root"
-  mode "0644"
-end
-template "/etc/devilry/devilry_production_settings.py" do
-  source "etc/devilry/devilry_production_settings.py.erb"
-  owner "root"
-  mode "0644"
-  variables({
-    :secret_key=> "#{node.devilryprodenv.settings.SECRET_KEY}",
-    :debug=> "#{node.devilryprodenv.settings.DEBUG}",
-    :dbbackend=> "#{node.devilryprodenv.settings.DBBACKEND}",
-    :dbname=> "#{node.devilryprodenv.settings.DBNAME}",
-    :dbuser=> "#{node.devilryprodenv.settings.DBUSER}",
-    :dbpassword=> "#{node.devilryprodenv.settings.DBPASSWORD}",
-    :dbhost=> "#{node.devilryprodenv.settings.DBHOST}",
-    :dbport=> "#{node.devilryprodenv.settings.DBPORT}",
-    :syncsystem=> "#{node.devilryprodenv.settings.DEVILRY_SYNCSYSTEM}",
-    :deliverystore_root=> "#{node.devilryprodenv.settings.DEVILRY_FSHIERDELIVERYSTORE_ROOT}",
-    :use_university_terms=> "#{node.devilryprodenv.settings.USE_UNIVERSITY_TERMS}"
-  })
-end
-
 
 #
-# Create directory for the files uploaded by students
+# Initialize the buildout
 #
-directory "/devilry-filestorage" do
-  owner "#{username}"
-  group "#{groupname}"
-  mode "0755"
-  action :create
+script "initialize_buildout" do
+  interpreter "bash"
+  user "#{username}"
+  cwd "#{homedir}/devilrybuild"
+  code <<-EOH
+  mkdir -p buildoutcache/dlcache
+  virtualenv --no-site-packages .
+  bin/easy_install zc.buildout
+  bin/buildout "buildout:parts=download-devilryrepo" && bin/buildout
+  bin/django.py syncdb --noinput
+  bin/django.py collectstatic --noinput
+  EOH
 end
-
-
-
-#script "clean_virtualenv_buildout" do
-  #interpreter "bash"
-  #user "#{username}"
-  #cwd "#{devilrybuild}"
-  #code <<-EOH
-  
-  #virtualenv venv
-  #venv/bin/python ../bootstrap.py -d
-  #bin/buildout
-  #bin/django.py collectstatic --noinput
-  #EOH
-#end

@@ -19,4 +19,3 @@ node.default["devilryprodenv"]["settings"]["DBPORT"] = "" # not required - defau
 node.default["devilryprodenv"]["settings"]["DEVILRY_SYNCSYSTEM"] = "The Devilry demo syncsystem"
 node.default["devilryprodenv"]["settings"]["DEVILRY_FSHIERDELIVERYSTORE_ROOT"] = "/devilry-filestorage"
 node.default["devilryprodenv"]["settings"]["USE_UNIVERSITY_TERMS"] = true
-#node.default["devilryprodenv"]["settings"][""] = ""
