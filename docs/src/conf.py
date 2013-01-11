@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 #
-# Trafo documentation build configuration file, created by
-# sphinx-quickstart on Sat May  5 19:53:03 2012.
-#
 # This file is execfile()d with the current directory set to its containing dir.
 #
 # Note that not all possible configuration values are present in this
@@ -170,7 +167,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Trafodoc'
+htmlhelp_basename = 'Devilrydeploydocs'
 
 
 # -- Options for LaTeX output --------------------------------------------------
