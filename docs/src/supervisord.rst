@@ -41,3 +41,13 @@ And restart supervisord.
 
 See the `Buildout recipe <http://pypi.python.org/pypi/collective.recipe.supervisor/>`_
 and the `Supervisord docs <http://supervisord.org/>`_ for more details.
+
+
+.. _supervisord-initscript:
+
+Init script
+===========
+The following init script works well. You need to adjust the ``DAEMON``-variable (`download <_static/supervisord>`_):
+
+.. literalinclude:: /_static/supervisord
+    :language: bash

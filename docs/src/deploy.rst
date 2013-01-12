@@ -108,6 +108,8 @@ To run supervisord in the foreground for testing/debugging, enable DEBUG-mode
 Make sure you disable DEBUG-mode afterwards.
 
 
+.. _run-supervisord-for-production:
+
 Run Supervisord for production
 -------------------------------
 
@@ -134,3 +136,10 @@ Devilry WSGI server (gunicorn). Gunicorn runs  on ``127.0.0.0:8002``.
 The webserver should use SSL.
 
 .. seealso:: :ref:`nginx`.
+
+
+Whats next?
+===========
+
+- :ref:`update`
+- :ref:`supervisord-initscript`
