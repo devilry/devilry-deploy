@@ -38,6 +38,9 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
+        # Note: We should not need this, since nginx should forward all headers by default
+        proxy_set_header X-DEVILRY_USE_EXTJS true;
+
         ## SSL options
         #proxy_set_header X-FORWARDED-PROTOCOL ssl;
         #proxy_set_header X-FORWARDED-SSL on;
