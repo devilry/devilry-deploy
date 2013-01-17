@@ -65,9 +65,18 @@ turn the directory into a Python module::
 
     $ touch /etc/devilry/__init__.py
 
-and add your own ``devilry_production_settings.py`` to the directory::
+and add your own ``devilry_prod_settings.py`` to the directory. This is a good starting point:
 
-    TODO
+.. literalinclude:: /examples/devilry_prod_settings.py
+    :language: python
+
+The config-file can contain any official Django settings, and Devilry provides
+some extra settings that should be useful:
+
+- :ref:`Django email backends <django:topic-email-backends>`
+- :djangodoc:`Django settings <topics/settings/>`
+- :devilryrepo_file:`Devilry settings <src/devilry_settings/devilry_settings/default_settings.py>` (scroll down to the *Default for settings defined by Devilry* section).
+
 
 
 Create the database
