@@ -40,8 +40,8 @@ Install required system packages
 See :ref:`required-system-packages`.
 
 
-Intialize the buildout
-======================
+Initialize the buildout
+=======================
 
 CD to the directory and run the following commands to download Devilry and
 all dependencies into a Python virtualenv. The end result is a
