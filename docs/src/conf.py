@@ -37,6 +37,16 @@ devilry_releasetype = 'rc'
 release = '{0}-{1}'.format(version, devilry_releasetype)
 
 
+if devilry_releasetype == '':
+    linked_devilryrelease_repo = release
+    linked_devilryrelease_docs = release
+else:
+    # We link to development versions during development to avoid having to
+    # make readthedocs versions for each RC and Beta.
+    linked_devilryrelease_repo = 'master'
+    linked_devilryrelease_docs = 'latest'
+
+
 # Mappings to other docs
 django_version = '1.4'
 intersphinx_mapping = {
@@ -47,9 +57,9 @@ intersphinx_mapping = {
 
 extlinks = {
     'djangodoc': ('https://docs.djangoproject.com/en/{0}/%s'.format(django_version), None),
-    'devilrydoc': ('https://devilry.readthedocs.org/en/{0}/%s'.format(version), None),
-    'devilryrepo_dir': ('https://github.com/devilry/devilry-django/tree/{0}/%s'.format(version), None),
-    'devilryrepo_file': ('https://github.com/devilry/devilry-django/blob/{0}/%s'.format(version), None),
+    'devilrydoc': ('https://devilry.readthedocs.org/en/{0}/%s'.format(linked_devilryrelease_docs), None),
+    'devilryrepo_dir': ('https://github.com/devilry/devilry-django/tree/{0}/%s'.format(linked_devilryrelease_repo), None),
+    'devilryrepo_file': ('https://github.com/devilry/devilry-django/blob/{0}/%s'.format(linked_devilryrelease_repo), None),
 }
 
 
