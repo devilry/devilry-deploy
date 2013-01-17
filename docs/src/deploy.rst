@@ -16,6 +16,8 @@ What this means for you is that you have to setup a very minimal
 buildout-config instead of downloading an archive and unzipping it.
 
 
+.. _configure_buildout:
+
 Configure buildout
 ==================
 Create a directory that will be used to configure your Devilry build::
@@ -130,7 +132,7 @@ To run supervisord in the background with a PID, run::
     $ bin/supervisord
 
 See :ref:`supervisord-configure` to see and configure where the PID-file is
-written.
+written, and for an init-script example.
 
 .. warning::
     Do NOT run supervisord as root. Run it as an unpriviledged used, preferably

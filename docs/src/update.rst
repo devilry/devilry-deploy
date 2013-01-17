@@ -1,19 +1,21 @@
 .. _update:
 
 ==============
-Update devilry
+Update Devilry
 ==============
 
-1. Update the ``extends``-attribute in the ``[buildout]`` section of your
-   ``buildout.cfg``. The last path-segment before ``buildout-base.cfg``
-   is the GIT revision (CommmitID, branch or tag).
+1. Update the ``REVISION`` in the ``extends``-attribute in the ``[buildout]`` section of your
+   ``buildout.cfg`` as explained in :ref:`configure_buildout`.
 
-2. Stop Supervisord. You will find the PID in ``/path/to/devilrybuild/var/supervisord.pid`` unless
-   you have configured it to be places somewhere else. See: :ref:`supervisord-configure`.
+2. Stop Supervisord. If you did not setup an init-script, you can use the PID-file
+   in ``/path/to/devilrybuild/var/supervisord.pid`` unless you have configured
+   it to be somewhere else. See: :ref:`supervisord-configure`.
 
 3. Run buildout::
 
     $ bin/buildout "buildout:parts=download-devilryrepo" && bin/buildout
     $ bin/django.py collectstatic --noinput
 
-4. Start Supervisord. See :ref:`run-supervisord-for-production`.
+4. Start Supervisord. If you have not created an init-script (see See:
+   :ref:`supervisord-configure`), start Supervisord manually as explained in
+   :ref:`run-supervisord-for-production`.
