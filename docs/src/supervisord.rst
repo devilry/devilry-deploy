@@ -51,3 +51,13 @@ The following init script works well. You need to adjust the ``DAEMON``-variable
 
 .. literalinclude:: /_static/supervisord
     :language: bash
+
+
+Harden supervisord
+==================
+
+The default configuration if for a dedicated server. Supervisorctl uses a
+password with the local Supervisord server, which needs to be a better password
+in a shared environment. This should not be a problem since it is madness to 
+host Devilry on a shared host in any case, but if you need to harden Supervisord,
+refer to the docs linked above.
