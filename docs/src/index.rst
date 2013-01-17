@@ -24,6 +24,7 @@ Contents:
    specifyversion
    awsfab
    vagrant
+   migrationguidelisting
 
 Indices and tables
 ==================

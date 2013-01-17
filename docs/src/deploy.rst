@@ -1,7 +1,7 @@
 .. _deploy:
 
 ==============
-Build devilry
+Build Devilry
 ==============
 Devilry does not come pre-packaged. Instead, we deploy using `buildout <http://www.buildout.org/>`_.
 There is several reasons for that:
@@ -81,7 +81,7 @@ some extra settings that should be useful:
 
 Create the database
 ===================
-When you have configured a database in ``devilry_production_settings.py``, you
+When you have configured a database in ``devilry_prod_settings.py``, you
 can use the following command to create your database::
 
     $ cd /path/to/devilrybuild
