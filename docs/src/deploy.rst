@@ -29,9 +29,10 @@ following to the configuration file::
     extends = https://raw.github.com/devilry/devilry-deploy/REVISION/buildout/buildout-base.cfg
 
 Replace ``REVISION`` (in the extends url) with the Devilry version you want to
-use (E.g.: ``v1.2.1``). See https://github.com/devilry/devilry-deploy/tags for
-the current releases, and refer to :devilrydoc:`The releasenotes listing
-<releasenoteslisting.html>` for the information about each release.
+use (E.g.: ``v1.2.1``). See `the tag listing on github
+<https://github.com/devilry/devilry-deploy/tags>`_ for a list of all releases,
+and refer to :devilrydoc:`The releasenotes listing <releasenoteslisting.html>`
+for the information about each release.
 
 
 Install required system packages
