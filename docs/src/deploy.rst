@@ -16,6 +16,13 @@ What this means for you is that you have to setup a very minimal
 buildout-config instead of downloading an archive and unzipping it.
 
 
+Create a system user for Devilry
+===================================
+You should run Devilry as a non-privledged user. We suggest you name the user
+something like ``devilryrunner``. Run all commands in this documentation as
+this user unless stated otherwise. 
+
+
 .. _configure_buildout:
 
 Configure buildout

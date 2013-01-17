@@ -4,6 +4,12 @@
 Update Devilry
 ==============
 
+.. note::
+    Remember that you should run all these commands as the system user
+    you created in the :ref:`Build Devilry <deploy> guide`.
+    The exception is, of course, stopping/starting Supervisord if you use an
+    init script.
+
 1. Update the ``REVISION`` in the ``extends``-attribute in the ``[buildout]`` section of your
    ``buildout.cfg`` as explained in :ref:`configure_buildout`.
 
