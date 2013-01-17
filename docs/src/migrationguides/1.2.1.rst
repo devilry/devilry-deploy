@@ -4,6 +4,9 @@
 Migrating from 1.1 to 1.2.1
 ===========================
 
+.. seealso:: :devilrydoc:`Releasenotes <releasenotes-1.2.1.html>`
+
+
 Stop Devilry
 ###############################
 Stop any running Devilry-server.
