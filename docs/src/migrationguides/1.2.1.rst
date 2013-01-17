@@ -73,12 +73,14 @@ sections on the dashboard:
 - More guides and help --- Click your username in the header, and see under
   the Help-heading.
 
-This means that you will get frustrated users unless you add Help-links. We
-suggest that you add the following for all roles:
+This means that you will get frustrated users unless you add Help-links.
+Login as a superuser and choose the superuser role on the frontpage to go to
+the admin-panel where you can edit help-links. We suggest that you add the
+following Help-links for all roles:
 
   https://devilry-userdoc.readthedocs.org/ --- Official Devilry user documentation
 
-And that you add any other guides that can make Devilry more user-friendly for
+You should also add any other guides that can make Devilry more user-friendly for
 your users. The most important such local guide is most likely an overview of
 how Devilry intergrates itself with your environment (where do users come
 from, and how are the assigned roles).
