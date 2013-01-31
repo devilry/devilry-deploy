@@ -8,6 +8,8 @@ Major changes
 ``1.2.1.1`` introduces Solr search and the Celery Task queue and periodic task
 scheduler to Devilry. Most of the setup is handled by our buildout recipes.
 
+Solr requires java 1.5 or later, GCJ does not work.
+
 
 Install RabbitMQ
 ################
