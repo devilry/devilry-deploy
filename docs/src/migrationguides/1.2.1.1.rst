@@ -14,7 +14,7 @@ Install RabbitMQ
 Follow the guides at their website: http://www.rabbitmq.com/download.html
 
 Refer to the RabbitMQ docs for regular configuration, like logging and
-database-file location. The defaults is usually quite good.
+database-file location. The defaults are usable.
 
 Configure RabbitMQ for Devilry
 ==============================
