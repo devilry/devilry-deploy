@@ -4,6 +4,11 @@
 Update Devilry
 ==============
 
+.. warning::
+    These are general instructions that work if we only have code changes.
+    Refer to the migration guide for each new version for the correct
+    instructions.
+
 .. note::
     Remember that you should run all these commands as the system user
     you created in the :ref:`Build Devilry guide <deploy>`.
