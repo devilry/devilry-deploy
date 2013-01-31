@@ -68,7 +68,9 @@ Update to ``v1.2.1.1`` using the instructions in the :ref:`update guide <update>
 
 Autocreate the new database tables for Celery
 #############################################
-::
+This command should be very safe, becuase it only creates new tables, and
+refuses to touch existing tables::
+
     $ bin/django.py syncdb
 
 
