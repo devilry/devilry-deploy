@@ -2,6 +2,9 @@
 Migration guides
 ===========================================
 
+If a minor version is not listed here, it is a code-only update, which means that
+the :ref:`update guide <update>` guide is all you need.
+
 .. toctree::
     :maxdepth: 1
 
