@@ -1,6 +1,6 @@
-===============================
-Migrating from 1.2.6 to 1.2.1.7
-===============================
+=================================
+Migrating from 1.2.1.6 to 1.2.1.7
+=================================
 
 .. warning:: Version 1.2.1.7 is not released yet, and this guide may change before release.
 
