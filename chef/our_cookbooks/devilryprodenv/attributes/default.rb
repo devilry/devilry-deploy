@@ -1,6 +1,7 @@
 # The branch, tag or commitID to check out
 node.default["devilryprodenv"]["devilry_version"] = "latest-stable"
 
+node.default["devilryprodenv"]["install_whoosh"] = false
 
 # The username and group
 node.default["devilryprodenv"]["username"] = "devilryrunner"

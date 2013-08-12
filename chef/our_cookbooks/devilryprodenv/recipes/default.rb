@@ -145,7 +145,8 @@ template "#{devilrybuild_dir}/buildout.cfg" do
     :username => "#{username}",
     :pidfile => "#{pidfile}",
     :supervisor => node[:devilryprodenv][:supervisor],
-    :gunicorn => node[:devilryprodenv][:gunicorn]
+    :gunicorn => node[:devilryprodenv][:gunicorn],
+    :install_whoosh => node[:devilryprodenv][:install_whoosh]
   })
 end
 

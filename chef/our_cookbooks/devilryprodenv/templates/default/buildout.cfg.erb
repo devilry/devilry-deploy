@@ -1,6 +1,13 @@
 [buildout]
 extends = https://raw.github.com/devilry/devilry-deploy/<%= @devilry_version %>/buildout/buildout-base.cfg
 
+<% if @install_whoosh -%>
+# Add the whoosh search indexer so that we can use
+# HAYSTACK_SEARCH_ENGINE="whoosh" to avoid sorl when testing.
+eggs +=
+    whoosh
+<% end -%>
+
 [supervisor]
 <% @supervisor.each_pair do |name, value| -%>
 <%= "#{name} = #{value}" %>
