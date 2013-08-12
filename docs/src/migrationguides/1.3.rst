@@ -35,4 +35,4 @@ this setting.
 
 Update to v1.3
 ==============
-Update to ``v1.3`` using the instructions in the :ref:`update guide <update>`.
+Update ``REVISION`` to ``v1.3`` using the instructions in the :ref:`update guide <update>`.
