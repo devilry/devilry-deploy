@@ -35,17 +35,6 @@ end
 
 
 #
-# Stop the Devilry services
-# - ignored if this is the first time we run the recipe and the init-script
-#   does not exist.
-#
-service "#{init_service_name}" do
-  only_if = "test -e #{pidfile}"
-  action [ :stop ]
-end
-
-
-#
 # Create the #{username} group, user and home directory
 #
 group "#{username}" do
@@ -168,12 +157,4 @@ script "initialize_buildout" do
   bin/django.py syncdb --noinput
   bin/django.py collectstatic --noinput
   EOH
-end
-
-
-
-
-# Enable the service (make it start at boot), and restart
-service "#{init_service_name}" do
-  action [ :enable, :start ]
 end

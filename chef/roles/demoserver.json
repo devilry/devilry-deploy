@@ -65,10 +65,12 @@
         "recipe[apt::default]",
         "recipe[postgresql::client]",
         "recipe[postgresql::server]",
+        "recipe[devilryprodenv::stop]",
         "recipe[django_postgresql::dropdb]",
         "recipe[django_postgresql]",
         "recipe[devilryprodenv]",
         "recipe[devilrydemo]",
+        "recipe[devilryprodenv::start]",
         "recipe[django_nginx]"
     ]
 }
