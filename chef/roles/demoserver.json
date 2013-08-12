@@ -34,6 +34,7 @@
           "address": "127.0.0.1",
           "workers": "4"
         },
+        "install_whoosh": true,
         "devilry": {
           "use_insecure_fast_passwordhasher": true,
           "database": {
