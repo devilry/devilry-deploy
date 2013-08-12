@@ -10,11 +10,8 @@ python "drop_postgresql_db" do
 from subprocess import check_call, check_output
 
 dbname = '#{dbname}'
-if not dbname in check_output(['psql', '-c', '\\list']):
-    print "Database '{0}' does not exist"
-else:
+if dbname in check_output(['psql', '-c', '\\list']):
     cmd = ['dropdb', dbname]
-    print 'Executing: "{0}"'.format(' '.join(cmd))
     check_call(cmd)
   EOH
 end
