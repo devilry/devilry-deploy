@@ -1,0 +1,48 @@
+.. _version1.3.1:
+
+.. warning::
+
+    This version is not released yet.
+
+==============================
+Migrating from 1.3 to 1.3.1
+==============================
+
+
+Changes
+#############
+- Initial South database migration setup. Makes no changes to our database
+  tables, but it adds tables for South migration history.
+- Fixed https://github.com/devilry/devilry-django/issues/437
+
+
+Backup database and files
+###############################
+BACKUP. YOUR. DATABASE. AND. FILES.
+
+
+Update devilry
+##############
+
+Update to v1.3
+==============
+Update ``REVISION`` to ``v1.3.1`` using the instructions in the :ref:`update guide <update>`.
+
+
+Apply the initial South migrations
+==================================
+Run the following commands to add the new South database tables, and fake the
+migrations to the current database state::
+
+    $ cd /path/to/devilrybuild
+    $ bin/django.py syncdb
+    $ bin/django.py core 0001 --fake
+    $ bin/django.py devilry_qualifiesforexam 0001 --fake
+    $ bin/django.py devilry_qualifiesforexam_points 0001 --fake
+    $ bin/django.py devilry_qualifiesforexam_approved 0001 --fake
+
+
+.. note::
+
+    We need to fake the migrations because we did not use South when the
+    database was intially created.
