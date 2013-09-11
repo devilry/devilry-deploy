@@ -45,6 +45,13 @@ Make sure to check that ``buildoutcache/eggs/`` is not empty after step 2
 (below). If ``eggs/`` is empty, you found the wrong buildoutcache directory,
 and you have to repeat steps 1 and 2.
 
+.. note::
+
+    You will probably get a lot of Fortran warnings/errormessages when you run
+    buildout in the next step. This is because the numpy library tries to build
+    stuff with fortran support. This is not a problem for Devilry - we do not use
+    any of the sub-modules that need Fortran.
+
 
 2 --- Update to v1.3 step 1-3
 =============================
