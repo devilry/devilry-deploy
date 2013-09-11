@@ -9,6 +9,9 @@ Changes
 #############
 - Initial South database migration setup. Makes no changes to our database
   tables, but it adds tables for South migration history.
+- Increased the timeout of gunicorn from 30 to 180 sec. This should avoid
+  timeouts on huge courses for really heavy operations like manually adding all
+  students.
 - Fixed:
     - https://github.com/devilry/devilry-django/issues/437
     - https://github.com/devilry/devilry-django/issues/444
