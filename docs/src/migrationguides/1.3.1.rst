@@ -1,9 +1,5 @@
 .. _version1.3.1:
 
-.. warning::
-
-    This version is not released yet.
-
 ==============================
 Migrating from 1.3 to 1.3.1
 ==============================
@@ -74,7 +70,7 @@ migrations to the current database state::
 .. note::
 
     We need to fake the migrations because we did not use South when the
-    database was intially created. Read more about South initial
+    database was intially created. You can read more about South initial
     `in their docs <http://south.readthedocs.org/en/latest/convertinganapp.html>`_.
 
 
