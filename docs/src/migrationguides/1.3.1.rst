@@ -66,15 +66,16 @@ migrations to the current database state::
 
     $ cd /path/to/devilrybuild
     $ bin/django.py syncdb
-    $ bin/django.py core 0001 --fake
-    $ bin/django.py devilry_qualifiesforexam 0001 --fake
-    $ bin/django.py devilry_qualifiesforexam_points 0001 --fake
-    $ bin/django.py devilry_qualifiesforexam_approved 0001 --fake
+    $ bin/django.py migrate core 0001 --fake
+    $ bin/django.py migrate devilry_qualifiesforexam 0001 --fake
+    $ bin/django.py migrate devilry_qualifiesforexam_points 0001 --fake
+    $ bin/django.py migrate devilry_qualifiesforexam_approved 0001 --fake
 
 .. note::
 
     We need to fake the migrations because we did not use South when the
-    database was intially created.
+    database was intially created. Read more about South initial
+    `in their docs <http://south.readthedocs.org/en/latest/convertinganapp.html>`_.
 
 
 4 --- Restart the servers
