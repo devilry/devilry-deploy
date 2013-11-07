@@ -50,7 +50,8 @@
             "HAYSTACK_SEARCH_ENGINE": "whoosh",
             "HAYSTACK_WHOOSH_PATH": "devilry_whoosh_index",
             "CELERY_ALWAYS_EAGER": true,
-            "EMAIL_BACKEND": "djcelery_email.backends.CeleryEmailBackend"
+            "EMAIL_BACKEND": "djcelery_email.backends.CeleryEmailBackend",
+            "CELERY_EMAIL_BACKEND": "django.core.mail.backends.console.EmailBackend"
           },
           "extra_installed_apps": [
             "devilry_sandbox",
