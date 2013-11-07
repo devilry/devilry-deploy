@@ -40,6 +40,10 @@ or go to http://localhost:9090/devilry_sandbox/createsubject-intro.
 
 Tips
 ====
-Re-provisioning a lot, and tired of waiting for ``dev_autodb``? Remove
-``"recipe[devilrydemo]"`` from ``chef/roles/demoserver.json``, just make sure
-you do not commit this change.
+Re-provisioning a lot, and tired of waiting for ``dev_autodb``? Edit
+``chef/our_cookbooks/devilrydemo/recipes/default.rb``, and change the
+``dev_autodb``-line to::
+
+  bin/django.py dev_autodb --no-groups > /tmp/devilrydemo-dev_autodb.log
+
+Just make sure you do not commit this change.

@@ -106,7 +106,7 @@ end
 #
 # Create the logdir
 #
-directory "#{node.devilryprodenv.supervisor.logdir}" do
+directory "#{node.devilryprodenv.variables.logdir}" do
   owner "#{username}"
   group "#{groupname}"
   mode "0755"
@@ -134,6 +134,7 @@ template "#{devilrybuild_dir}/buildout.cfg" do
     :username => "#{username}",
     :pidfile => "#{pidfile}",
     :supervisor => node[:devilryprodenv][:supervisor],
+    :variables => node[:devilryprodenv][:variables],
     :gunicorn => node[:devilryprodenv][:gunicorn],
     :install_whoosh => node[:devilryprodenv][:install_whoosh]
   })

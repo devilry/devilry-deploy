@@ -27,6 +27,7 @@
       },
       "devilryprodenv": {
         "devilry_version": "master",
+        "devilry_rev": "origin/master",
         "supervisor": {
           "logfile-backups": 10
         },

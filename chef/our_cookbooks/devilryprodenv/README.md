@@ -45,7 +45,7 @@ Buildout
 - ``node["devilryprodenv"]["supervisor"]["pidfile"]`` -
   Defaults to ``/var/run/SERVICENAME.pid``. SERVICENAME is configured
   in ``node["devilryprodenv"]["supervisord_servicename"]``.
-- ``node["devilryprodenv"]["supervisor"]["logdir"]`` - Defaults
+- ``node["devilryprodenv"]["variables"]["logdir"]`` - Defaults
   to ``/var/log/devilry``. Created if it does not exist.
   The ``node["devilryprodenv"]["username"]``-user must have write
   permissions to this directory.

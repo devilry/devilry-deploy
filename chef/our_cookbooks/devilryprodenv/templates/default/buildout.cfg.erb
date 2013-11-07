@@ -8,6 +8,14 @@ eggs +=
     whoosh
 <% end -%>
 
+[download-devilryrepo]
+rev = <%= @devilry_rev %>
+
+[variables]
+<% @variables.each_pair do |name, value| -%>
+<%= "#{name} = #{value}" %>
+<% end -%>
+
 [supervisor]
 <% @supervisor.each_pair do |name, value| -%>
 <%= "#{name} = #{value}" %>

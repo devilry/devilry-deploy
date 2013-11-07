@@ -1,5 +1,6 @@
 # The branch, tag or commitID to check out
 node.default["devilryprodenv"]["devilry_version"] = "latest-stable"
+node.default["devilryprodenv"]["devilry_rev"] = "origin/latest-stable"
 
 node.default["devilryprodenv"]["install_whoosh"] = false
 
@@ -9,12 +10,14 @@ node.default["devilryprodenv"]["groupname"] = "devilryrunner"
 node.default["devilryprodenv"]["homedir"] = "/home/#{node.devilryprodenv.username}"
 node.default["devilryprodenv"]["devilrybuild_dir"] = "#{node.devilryprodenv.homedir}/devilrybuild"
 
+
 # Supervisor
 node.default["devilryprodenv"]["gunicorn"] = {}
+node.default["devilryprodenv"]["variables"] = {}
+node.default["devilryprodenv"]["variables"]["logdir"] = "/var/log/devilry"
 node.default["devilryprodenv"]["supervisord_servicename"] = "supervisord"
 node.default["devilryprodenv"]["supervisor"] = {}
 node.default["devilryprodenv"]["supervisor"]["pidfile"] = "/var/run/#{node.devilryprodenv.supervisord_servicename}.pid"
-node.default["devilryprodenv"]["supervisor"]["logdir"] = "/var/log/devilry"
 
 # Devilry settings
 node.default["devilryprodenv"]["devilry"]["use_university_terms"] = true
