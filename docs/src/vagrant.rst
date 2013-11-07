@@ -36,3 +36,10 @@ with one of::
 - ``grandma`` (superuser)
 
 or go to http://localhost:9090/devilry_sandbox/createsubject-intro.
+
+
+Tips
+====
+Re-provisioning a lot, and tired of waiting for ``dev_autodb``? Remove
+``"recipe[devilrydemo]"`` from ``chef/roles/demoserver.json``, just make sure
+you do not commit this change.
