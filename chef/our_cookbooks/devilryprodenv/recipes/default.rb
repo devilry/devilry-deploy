@@ -154,7 +154,7 @@ script "initialize_buildout" do
   bin/easy_install distribute==0.6.45
   bin/easy_install zc.buildout==1.7.1
   bin/buildout "buildout:parts=download-devilryrepo" && bin/buildout
-  bin/django.py syncdb --noinput
+  bin/django.py syncdb --noinput --migrate
   bin/django.py collectstatic --noinput
   EOH
 end
