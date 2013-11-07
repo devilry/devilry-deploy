@@ -94,6 +94,17 @@ some extra settings that should be useful:
   https://github.com/devilry/devilry-django/issues/477).
 
 
+.. note::
+
+    You can put ``devilry_prod_settings.py`` in another directory. You just have to set::
+
+        [buildout]
+        ...
+        configdir = /etc/devilry
+
+    in your ``buildout.cfg`` and re-run ``bin/buildout``.
+        
+
 
 Create the database
 ===================
