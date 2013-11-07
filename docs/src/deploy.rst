@@ -102,7 +102,7 @@ can use the following command to create your database::
 The script will ask you to create a superuser. Choose a strong password - this
 user will have complete access to everything in Devilry.
 
-=================
+
 Install RabbitMQ
 =================
 Follow the guides at their website: http://www.rabbitmq.com/download.html
