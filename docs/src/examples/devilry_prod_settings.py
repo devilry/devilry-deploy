@@ -33,11 +33,11 @@ DEVILRY_EMAIL_DEFAULT_FROM = 'devilry-support@example.com'
 DEVILRY_SCHEME_AND_DOMAIN = 'https://devilry.example.com'
 
 #: Configure an email backend (see the docs for more info)
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_HOST_USER = ''
-#EMAIL_HOST_PASSWORD = ''
-#EMAIL_PORT = 25
-#EMAIL_USE_TLS = False
+#EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+#CELERY_EMAIL_HOST_USER = ''
+#CELERY_EMAIL_HOST_PASSWORD = ''
+#CELERY_EMAIL_PORT = 25
+#CELERY_EMAIL_USE_TLS = False
 
 ##################################################################################
 # Other settings

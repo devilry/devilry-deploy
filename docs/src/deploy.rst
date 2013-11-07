@@ -88,6 +88,10 @@ some extra settings that should be useful:
 - :ref:`Django email backends <django:topic-email-backends>`
 - :djangodoc:`Django settings <topics/settings/>`
 - :devilryrepo_file:`Devilry settings <src/devilry_settings/devilry_settings/default_settings.py>` (scroll down to the *Default for settings defined by Devilry* section).
+- `django-celery-email <https://pypi.python.org/pypi/django-celery-email>`_ is
+  an addon that sends email in a background queue. The addon is installed by
+  devilry-deploy by default, and is highly recommended (see
+  https://github.com/devilry/devilry-django/issues/477).
 
 
 
