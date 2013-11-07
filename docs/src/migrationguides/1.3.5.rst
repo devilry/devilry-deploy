@@ -26,9 +26,21 @@ BACKUP. YOUR. DATABASE. AND. FILES.
 Update devilry
 ==============
 
+Move your logdir buildout config
+--------------------------------
+Previous versions of ``devilry-deploy`` defined the ``logdir`` in the
+``[supervisor]``-section of ``buildout.cfg``. This has been moved to
+``[variables]``. You should end up with something like this::
+
+    [variables]
+    logdir = /var/log/devilry
+
+
+
 Update to v1.3.5 - but do not restart supervisord
 -------------------------------------------------
 Update ``REVISION`` to ``v1.3.5`` using the instructions in the :ref:`update guide <update>`, but stop after step 3.
+
 
 
 Update your email settings to use django-celery-email
