@@ -1,8 +1,8 @@
 .. _deploy:
 
-==============
+**************
 Build Devilry
-==============
+**************
 Devilry does not come pre-packaged. Instead, we deploy using `buildout <http://www.buildout.org/>`_.
 There is several reasons for that:
 
@@ -101,6 +101,43 @@ can use the following command to create your database::
 
 The script will ask you to create a superuser. Choose a strong password - this
 user will have complete access to everything in Devilry.
+
+
+Install RabbitMQ
+=================
+Follow the guides at their website: http://www.rabbitmq.com/download.html
+
+Refer to the RabbitMQ docs for regular configuration, like logging and
+database-file location. The defaults are usable.
+
+Configure RabbitMQ for Devilry
+-------------------------------
+Start the RabbitMQ server.
+
+RabbitMQ creates a default admin user named ``guest`` with password ``guest``.
+Remove the guest user, and create a new admin user (use another password than
+``secret``)::
+
+    $ rabbitmqctl delete_user guest
+    $ rabbitmqctl add_user admin secret
+    $ rabbitmqctl set_user_tags admin administrator
+    $ rabbitmqctl set_permissions admin ".*" ".*" ".*"
+
+Setup a vhost for Devilry with a username and password (use another password
+than ``secret``)::
+
+    $ rabbitmqctl add_user devilry secret
+    $ rabbitmqctl add_vhost devilryhost
+    $ rabbitmqctl set_permissions -p devilryhost devilry ".*" ".*" ".*"
+
+
+
+Add RabbitMQ settings to Devilry
+---------------------------------
+Add the following to ``/etc/devilry_prod_settings.py`` (change ``secret`` to
+match your password)::
+
+    $ BROKER_URL = 'amqp://devilry:secret@localhost:5672/devilryhost'
 
 
 Test the install
