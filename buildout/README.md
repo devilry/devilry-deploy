@@ -6,6 +6,12 @@ Devilry using devilry-deploy.
  
     $ mkdir -p buildoutcache/dlcache buildoutcache/eggs
 
+Install system dependencies
+----------------------------
+
+* Postgres Development Headers
+    * libpq-dev in ubuntu
+
 ## Build buildout
 
     $ virtualenv .
