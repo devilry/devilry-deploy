@@ -16,18 +16,21 @@ should be redefined accordingly.
     # The full path to the supervisord log directory.
     # Defaults to /path/to/devilrybuild/var/log/
     # Note: This setting is added by our buildout-base.cfg, and not by the
-    #       supervisor buildout recipe.
+    # supervisor buildout recipe.
     #logdir = 
 
     # Where logs are placed on the filesystem
+    
     logdir = ${buildout:directory}/var/log
     
-    Max number of bytes in a single log
+    # Max number of bytes in a single log
+    
     logfile-maxbytes = 50MB
     
     # Number of times a log rotates - note that each program running under
     # supervisor has 2 logs (stdout and stderr), and each log will consume
     # ``logfile-maxbytes * logfile-backups`` of disk space.
+    
     logfile-backups = 30
 
 Rebuild the Supervisord config (output in ``parts/supervisor/supervisord.conf``)::
