@@ -6,32 +6,29 @@ Configure supervisord (logging, pidfile, ...)
 We handle all logging through Supervisord, so you will probably at least want
 to configure where we log to.
 
-You configure supervisord through your ``buildout.cfg``. Add a
-``supervisor``-section, and tune the settings::
+Supervisor variables are now iniatially defined in the ``variables``
+section in ``buildout-base.cfg`` and can be overridden by adding a ``variables``
+section in your own buildout config file. Logging directory and rotation parameters
+should be redefined accordingly.
 
-    [supervisor]
+
+    [variables]
     # The full path to the supervisord log directory.
     # Defaults to /path/to/devilrybuild/var/log/
     # Note: This setting is added by our buildout-base.cfg, and not by the
     #       supervisor buildout recipe.
     #logdir = 
 
-    # The pid file of supervisord. Defaults to
-    # /path/to/devilrybuild/var/supervisord.pid
-    #pidfile =
-
-    # The maximum number of bytes that may be consumed by the activity log file
-    # before it is rotated. Defaults to 50MB.
-    #logfile-maxbytes =
-
-    # The number of backups to keep around resulting from activity log file
-    # rotation. Defaults to 30.
-    #logfile-backups = 
-
-    # If supervisord is run as the root user, switch users to this UNIX user
-    # account before doing any meaningful processing. This value has no effect if
-    # supervisord is not run as root.
-    supervisord-user =
+    # Where logs are placed on the filesystem
+    logdir = ${buildout:directory}/var/log
+    
+    Max number of bytes in a single log
+    logfile-maxbytes = 50MB
+    
+    # Number of times a log rotates - note that each program running under
+    # supervisor has 2 logs (stdout and stderr), and each log will consume
+    # ``logfile-maxbytes * logfile-backups`` of disk space.
+    logfile-backups = 30
 
 Rebuild the Supervisord config (output in ``parts/supervisor/supervisord.conf``)::
 
