@@ -2,6 +2,19 @@
 Migrating from 1.3.4 to 1.3.5
 *********************************************
 
+.. warning::
+
+    This guide has been updated because of `issue 480
+    <https://github.com/devilry/devilry-django/issues/480>`_. The only change
+    a fourth step under :ref:`migrationguide1.3.5-update-settings`.
+
+    If you have already completed the guide, but failed at the email settings step:
+
+    1. Stop supervisord.
+    2. Perform all changes in :ref:`migrationguide1.3.5-update-settings`.
+    3. Start supervisord.
+    4. Test that email is working as described in the last section of this guide.
+
 
 Changes
 =======
@@ -44,8 +57,10 @@ Update ``REVISION`` to ``v1.3.5`` using the instructions in the :ref:`update gui
 
 
 
-Update your email settings to use django-celery-email
------------------------------------------------------
+.. _migrationguide1.3.5-update-settings:
+
+Update your settings to use django-celery-email
+-----------------------------------------------
 
 .. note::
 
@@ -60,12 +75,25 @@ To configure Devilry to use django-celery-email, do the following:
    somewhere safe in case the new email backend does not work correctly.
 2. Replace the value of your ``EMAIL_BACKEND``-setting with
    ``djcelery_email.backends.CeleryEmailBackend``.
-3. Prefix all other ``EMAIL_*``-settings with ``CELERY_``. You should end up
-   with something like this::
+3. Prefix all other ``EMAIL_*``-settings with ``CELERY_``.
+4. Add ``djcelery_email`` to the ``INSTALLED_APPS``-setting::
+
+      INSTALLED_APPS += ['djcelery_email']
+
+   Make sure you use ``+=``, NOT ``=``.
+
+You should end up with something like this::
 
       EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
       CELERY_EMAIL_HOST = 'smtp.example.com'
       CELERY_EMAIL_PORT = 25
+      INSTALLED_APPS += ['djcelery_email']
+
+.. warning::
+
+    The fourth step in the list above was not included in the original release
+    notes for ``1.3.5``. See
+    https://github.com/devilry/devilry-django/issues/480.
 
 
 Restart supervisord
