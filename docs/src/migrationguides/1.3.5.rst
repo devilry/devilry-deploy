@@ -6,7 +6,7 @@ Migrating from 1.3.4 to 1.3.5
 
     This guide has been updated because of `issue 480
     <https://github.com/devilry/devilry-django/issues/480>`_. The only change
-    a fourth step under :ref:`migrationguide1.3.5-update-settings`.
+    is a fourth step under :ref:`migrationguide1.3.5-update-settings`.
 
     If you have already completed the guide, but failed at the email settings step:
 
