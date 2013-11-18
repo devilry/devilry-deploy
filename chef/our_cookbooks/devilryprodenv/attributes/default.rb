@@ -15,6 +15,7 @@ node.default["devilryprodenv"]["buildoutconfig"] = "buildout.cfg"
 # Buildout
 node.default["devilryprodenv"]["gunicorn"] = {}
 node.default["devilryprodenv"]["extra_sources"] = {}
+node.default["devilryprodenv"]["extra_eggs"] = []
 node.default["devilryprodenv"]["variables"] = {}
 node.default["devilryprodenv"]["variables"]["logdir"] = "/var/log/devilry"
 node.default["devilryprodenv"]["supervisord_servicename"] = "supervisord"

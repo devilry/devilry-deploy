@@ -138,7 +138,7 @@ template "#{devilrybuild_dir}/buildout.cfg" do
     :variables => node[:devilryprodenv][:variables],
     :gunicorn => node[:devilryprodenv][:gunicorn],
     :extra_sources => node[:devilryprodenv][:extra_sources],
-    :install_whoosh => node[:devilryprodenv][:install_whoosh]
+    :extra_eggs => node[:devilryprodenv][:extra_eggs],
   })
 end
 
