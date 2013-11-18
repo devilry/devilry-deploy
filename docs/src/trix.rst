@@ -40,8 +40,13 @@ Add the following to your ``buildout.cfg``::
 You should already have a ``[buildout]``-section, so make sure you do not end
 up with two of them.
 
-
 .. warning:: Make sure you use ``eggs +=`` and NOT ``eggs =``.
+
+After updating the buildout config, your have to run::
+
+    $ cd /path/to/direcetory/containing/buildout.cfg/
+    $ bin/buildout
+
 
 
 Update ``devilry_prod_settings.py`` for Trix
@@ -66,4 +71,6 @@ Follow the :doc:`custom_root_urls`-guide, and add the following URL for Trix::
     url(r'^trix/', include('trix.urls')),
 
 
-Update buildout
+Restart supervisord
+-------------------
+As explained in :doc:`deploy`.
