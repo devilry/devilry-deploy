@@ -32,10 +32,10 @@ Add the following to your ``buildout.cfg``::
         trix_extjshelpers
 
     [devilrydeploy_sources]
-    trix = git https://github.com/devilry/trix.git pushurl=git@github.com:devilry/trix.git
-    trix_simplified = git https://github.com/devilry/trix_simplified.git pushurl=git@github.com:devilry/trix_simplified.git
-    trix_restful = git https://github.com/devilry/trix_restful.git pushurl=git@github.com:devilry/trix_restful.git
-    trix_extjshelpers = git https://github.com/devilry/trix_extjshelpers.git pushurl=git@github.com:devilry/trix_extjshelpers.git
+    trix = git https://github.com/devilry/trix.git
+    trix_simplified = git https://github.com/devilry/trix_simplified.git
+    trix_restful = git https://github.com/devilry/trix_restful.git
+    trix_extjshelpers = git https://github.com/devilry/trix_extjshelpers.git
 
 You should already have a ``[buildout]``-section, so make sure you do not end
 up with two of them.
