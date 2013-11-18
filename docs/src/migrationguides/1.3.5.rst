@@ -85,8 +85,9 @@ To configure Devilry to use django-celery-email, do the following:
 You should end up with something like this::
 
       EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
-      CELERY_EMAIL_HOST = 'smtp.example.com'
-      CELERY_EMAIL_PORT = 25
+      CELERY_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+      EMAIL_HOST = 'smtp.example.com'
+      EMAIL_PORT = 25
       INSTALLED_APPS += ['djcelery_email']
 
 .. warning::
