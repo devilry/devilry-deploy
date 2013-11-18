@@ -1,6 +1,9 @@
 [buildout]
 extends = https://raw.github.com/devilry/devilry-deploy/<%= @devilry_version %>/buildout/buildout-base.cfg
 
+# Set the timeout of http operations to 20 sek instead of the default 5 sek.
+socket-timeout = 20
+
 <% if @install_whoosh -%>
 # Add the whoosh search indexer so that we can use
 # HAYSTACK_SEARCH_ENGINE="whoosh" to avoid sorl when testing.
@@ -25,5 +28,10 @@ supervisord-user = <%= @username %>
 
 [gunicorn]
 <% @gunicorn.each_pair do |name, value| -%>
+<%= "#{name} = #{value}" %>
+<% end -%>
+
+[sources]
+<% @extra_sources.each_pair do |name, value| -%>
 <%= "#{name} = #{value}" %>
 <% end -%>

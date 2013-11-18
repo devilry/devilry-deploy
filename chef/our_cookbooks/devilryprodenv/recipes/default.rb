@@ -12,6 +12,7 @@ username = "#{node.devilryprodenv.username}"
 groupname = "#{node.devilryprodenv.groupname}"
 homedir = "#{node.devilryprodenv.homedir}"
 devilrybuild_dir = "#{node.devilryprodenv.devilrybuild_dir}"
+buildoutconfig = "#{node.devilryprodenv.buildoutconfig}"
 init_service_name = "#{node.devilryprodenv.supervisord_servicename}"
 init_script = "/etc/init.d/#{init_service_name}"
 pidfile = "#{homedir}/devilrybuild/var/supervisord.pid"
@@ -136,6 +137,7 @@ template "#{devilrybuild_dir}/buildout.cfg" do
     :supervisor => node[:devilryprodenv][:supervisor],
     :variables => node[:devilryprodenv][:variables],
     :gunicorn => node[:devilryprodenv][:gunicorn],
+    :extra_sources => node[:devilryprodenv][:extra_sources],
     :install_whoosh => node[:devilryprodenv][:install_whoosh]
   })
 end
@@ -154,7 +156,7 @@ script "initialize_buildout" do
   virtualenv --no-site-packages .
   bin/easy_install distribute==0.6.45
   bin/easy_install zc.buildout==1.7.1
-  bin/buildout "buildout:parts=download-devilryrepo" && bin/buildout
+  bin/buildout "buildout:parts=download-devilryrepo" -c #{buildoutconfig} && bin/buildout -c #{buildoutconfig}
   bin/django.py syncdb --noinput --migrate
   bin/django.py collectstatic --noinput
   EOH

@@ -9,10 +9,12 @@ node.default["devilryprodenv"]["username"] = "devilryrunner"
 node.default["devilryprodenv"]["groupname"] = "devilryrunner"
 node.default["devilryprodenv"]["homedir"] = "/home/#{node.devilryprodenv.username}"
 node.default["devilryprodenv"]["devilrybuild_dir"] = "#{node.devilryprodenv.homedir}/devilrybuild"
+node.default["devilryprodenv"]["buildoutconfig"] = "buildout.cfg"
 
 
-# Supervisor
+# Buildout
 node.default["devilryprodenv"]["gunicorn"] = {}
+node.default["devilryprodenv"]["extra_sources"] = {}
 node.default["devilryprodenv"]["variables"] = {}
 node.default["devilryprodenv"]["variables"]["logdir"] = "/var/log/devilry"
 node.default["devilryprodenv"]["supervisord_servicename"] = "supervisord"
