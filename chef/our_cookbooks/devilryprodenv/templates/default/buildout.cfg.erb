@@ -29,7 +29,7 @@ supervisord-user = <%= @username %>
 <%= "#{name} = #{value}" %>
 <% end -%>
 
-[sources]
+[devilrydeploy_sources]
 <% @extra_sources.each_pair do |name, value| -%>
 <%= "#{name} = #{value}" %>
 <% end -%>
