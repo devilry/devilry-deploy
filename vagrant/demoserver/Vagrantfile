@@ -51,9 +51,9 @@ Vagrant::Config.run do |config|
   # some recipes and/or roles.
   #
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = ["../chef/cookbooks", "../chef/our_cookbooks"]
-    chef.roles_path = "../chef/roles"
-    chef.data_bags_path = "../chef/data_bags"
+    chef.cookbooks_path = ["../../chef/cookbooks", "../../chef/our_cookbooks"]
+    chef.roles_path = "../../chef/roles"
+    chef.data_bags_path = "../../chef/data_bags"
     chef.add_role "demoserver"
   
     # Make nginx serve django on port 9090:
