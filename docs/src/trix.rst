@@ -2,6 +2,10 @@
 Build Trix
 **********
 
+.. warning::
+
+    This guide is under development, and is not ready for production use yet.
+
 .. seealso:: :ref:`vagrant_test_trix`.
 
     
