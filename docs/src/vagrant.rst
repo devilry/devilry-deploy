@@ -52,4 +52,6 @@ this change.
 Want to Test Trix?
 ==================
 To the the devilry-subproject Trix, follow the instructions above, but use
-``vagrant/trixtest/`` instead of ``vagrant/demoserver/``.
+``vagrant/trixtest/`` instead of ``vagrant/demoserver/``. Trixtest runs on
+http://localhost:9091, so you can safely run both ``devilrydemo`` and
+``trixtest`` at the same time.
