@@ -23,9 +23,9 @@ Contents:
    nginx
    specifyversion
    awsfab
+   custom_root_urls
    trix
    vagrant
-   custom_root_urls
    migrationguidelisting
 
 Indices and tables
