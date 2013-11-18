@@ -24,7 +24,7 @@ Create a vagrant box
 ====================
 ::
 
-  $ cd vagrant/
+  $ cd vagrant/demoserver/
   $ vagrant up
 
 When the box is up, you can visit Devilry at http://localhost:9090. Login
@@ -41,9 +41,15 @@ or go to http://localhost:9090/devilry_sandbox/createsubject-intro.
 Tips
 ====
 Re-provisioning a lot, and tired of waiting for ``dev_autodb``? Edit
-``chef/our_cookbooks/devilrydemo/recipes/default.rb``, and change the
-``dev_autodb``-line to::
+``chef/roles/demoserver.json`` and change ``recipe[devilrydemo]`` to
+``recipe[devilry_minimal_autodb]``. ``devilry_minimal_autodb`` runs
+``dev_autodb --no-groups``, which means that the testdatabase will not have any
+students/groups registered on the assignments. Just make sure you do not commit
+this change.
 
-  bin/django.py dev_autodb --no-groups > /tmp/devilrydemo-dev_autodb.log
 
-Just make sure you do not commit this change.
+
+Want to Test Trix?
+==================
+To the the devilry-subproject Trix, follow the instructions above, but use
+``vagrant/trixtest/`` instead of ``vagrant/demoserver/``.
