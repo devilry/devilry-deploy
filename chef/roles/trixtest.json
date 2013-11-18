@@ -1,0 +1,94 @@
+{
+    "name": "demoserver",
+    "description": "Install and set up everything needed for a Trix testserver.",
+    "json_class": "Chef::Role",
+    "chef_type": "role",
+
+    "default_attributes": {
+      "postgresql": {
+        "password": {
+          "postgres": "extrasecret"
+        },
+        "config": {
+          "listen_addresses": "localhost"
+        }
+      },
+      "django_postgresql": {
+        "dbname": "djangodb",
+        "username": "djangouser",
+        "password": "supersecret"
+      },
+      "nginx": {
+        "worker_processes": 4,
+        "default_site_enabled": false
+      },
+      "django_nginx": {
+        "statichome": "/home/devilryrunner/devilrybuild"
+      },
+      "devilryprodenv": {
+        "devilry_version": "master",
+        "devilry_rev": "origin/master",
+        "supervisor": {
+          "logfile-backups": 10
+        },
+        "gunicorn": {
+          "address": "127.0.0.1",
+          "workers": "4"
+        },
+        "extra_eggs": [
+          "whoosh",
+          "trix",
+          "trix_simplified",
+          "trix_restful",
+          "trix_extjshelpers"
+        ],
+        "extra_sources": {
+          "trix": "git https://github.com/devilry/trix.git",
+          "trix_simplified": "git https://github.com/devilry/trix_simplified.git",
+          "trix_restful": "git https://github.com/devilry/trix_restful.git",
+          "trix_extjshelpers": "git https://github.com/devilry/trix_extjshelpers.git"
+        },
+        "devilry": {
+          "use_insecure_fast_passwordhasher": true,
+          "database": {
+            "NAME": "djangodb",
+            "USER": "djangouser",
+            "PASSWORD": "supersecret",
+            "HOST": "localhost"
+          },
+          "settings": {
+            "SECRET_KEY": "+g$%**q(w78xqa_2)(_+%v8d)he-b_^@d*pqhq!#2p*a7*9e9h",
+            "DEBUG": true,
+            "DEVILRY_SYNCSYSTEM": "The Devilry demo syncsystem",
+            "HAYSTACK_SEARCH_ENGINE": "whoosh",
+            "HAYSTACK_WHOOSH_PATH": "devilry_whoosh_index",
+            "CELERY_ALWAYS_EAGER": true,
+            "EMAIL_BACKEND": "django.core.mail.backends.console.EmailBackend"
+          },
+          "extra_installed_apps": [
+            "trix",
+            "trix_extjshelpers",
+            "trix_restful",
+            "trix_simplified"
+          ],
+          "extra_urls": [
+            "url(r'^trix/', include('trix.urls'))"
+          ]
+        }
+      }
+    },
+    "override_attributes": { },
+
+    "run_list": [
+        "recipe[apt::default]",
+        "recipe[postgresql::client]",
+        "recipe[postgresql::server]",
+        "recipe[devilryprodenv::stop]",
+        "recipe[django_postgresql::dropdb]",
+        "recipe[django_postgresql]",
+        "recipe[devilryprodenv]",
+        "recipe[devilry_minimal_autodb]",
+        "recipe[devilryprodenv::start]",
+        "recipe[django_nginx]"
+    ]
+}
