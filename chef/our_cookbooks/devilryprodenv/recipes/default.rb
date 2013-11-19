@@ -156,7 +156,8 @@ script "initialize_buildout" do
   virtualenv --no-site-packages .
   bin/easy_install distribute==0.6.45
   bin/easy_install zc.buildout==1.7.1
-  bin/buildout "buildout:parts=download-devilryrepo" -c #{buildoutconfig} && bin/buildout -c #{buildoutconfig}
+  #bin/buildout "buildout:parts=download-devilryrepo" -c #{buildoutconfig}
+  bin/buildout -c #{buildoutconfig}
   bin/django.py syncdb --noinput --migrate
   bin/django.py collectstatic --noinput
   EOH

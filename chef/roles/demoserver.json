@@ -74,9 +74,13 @@
         "recipe[postgresql::server]",
         "recipe[devilryprodenv::stop]",
         "recipe[django_postgresql::dropdb]",
+
         "recipe[django_postgresql]",
+        /*"recipe[django_postgresql::load_dump]",*/
         "recipe[devilryprodenv]",
         "recipe[devilrydemo]",
+        "recipe[devilrydemo::creategrandma]",
+
         "recipe[devilryprodenv::start]",
         "recipe[django_nginx]"
     ]
