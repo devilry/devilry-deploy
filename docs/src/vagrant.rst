@@ -54,6 +54,10 @@ right after ``django_postgresql``. I.E::
  must also remove ``recipe[devilry_minimal_autodb]"`` and/or
  ``"recipe[devilrydemo]"``.
 
+ The database must be placed in ``dbdump.postgres.sql`` in the same directory
+ as ``Vagrantfile`` (I.E.: It should be available as
+ ``/vagrant/dbdump.postgres.sql`` to the Vagrant VM).
+
 
 Tips
 ====
