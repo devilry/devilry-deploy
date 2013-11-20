@@ -96,13 +96,12 @@ some extra settings that should be useful:
 
 .. note::
 
-    You can put ``devilry_prod_settings.py`` in another directory. You just have to set::
+    You can put ``devilry_prod_settings.py`` in another directory. You just have to add::
 
-        [buildout]
-        ...
+        [devilry]
         configdir = /etc/devilry
 
-    in your ``buildout.cfg`` and re-run ``bin/buildout``.
+    to your ``buildout.cfg`` and re-run ``bin/buildout``.
         
 
 
