@@ -30,3 +30,24 @@ Make ``devilry_prod_settings.py`` use your custom urls
 Update your ``devilry_prod_settings.py`` with::
 
     ROOT_URLCONF = 'devilry_prod_urls'
+
+
+
+Use a custom Frontpage?
+=======================
+You can easily create serve your own Django app as the frontpage instead of the
+default Devilry frontpage. Django uses the first matched url-config, so we can
+override the match for ``/`` and replace it with our own view.
+
+Here is an example that sets up urls for the Trix-project on ``/trix/``, and
+uses a Django redirect view to redirect the frontpage to that URL. We also
+setup the default Devilry frontpage at ``/devilry/``:
+
+.. literalinclude:: /examples/devilry_prod_urls_custom_frontpage.py
+    :language: python
+    :linenos:
+
+.. note::
+
+    Tou do not have to redirect from the frontpage, you can just as easily use
+    a Django view that renders your view at ``/`` without a redirect.
