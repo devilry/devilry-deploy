@@ -1,10 +1,15 @@
-
 .. _required-system-packages:
 
 ========================
 Required system packages
 ========================
 
+Python 2.7+
+-----------
+If you do not have it installed globally, it is quite easy to build and install
+python in a local folder just for Devilry. Take a look at the guide in our
+wiki: https://github.com/devilry/devilry-django/wiki/Installing-Python-locally. Note that
+the guide installs to ``$HOME``, but you can use any folder.
 
 Python virtualenv
 -----------------
