@@ -46,7 +46,7 @@ in which every log is stored on temporary terms. Every configuration parameter w
 the final ``supervisord.conf`` file in is ``[program:x]`` block. We never edit the configure directly
 but tunes the parameters from within the buildout files. So in ``buildout-base.cfg`` each process are configured
 with the extracted variables from the ``[variables]`` section you defined above. Check out the file
-https://github.com/devilry/devilry-deploy/blob/master/buildout/buildout-base.cfg and look for 
+`buildout-base.cfg <https://github.com/devilry/devilry-deploy/blob/master/buildout/buildout-base.cfg>`_ and look for 
 ``${variables:x}`` where x is the name of the variable you have redefined. 
 
 As an example we look into gunicorn configuration::
@@ -73,21 +73,39 @@ As an example we look into gunicorn configuration::
     Defined as the number of rotations for each logged reaching ``logfile-maxbytes`` stored data
     
 ``logoptions = stdout_logfile=${variables:logdir}/gunicorn.stdout.log``
-    This is the options to the gunicorn application and directly affects the gunicorn logging behaviour.
-    every application setup for loggin will have the same logfile naming convention where the ``logdir`` is
-    defined and then the name will consist of ``<appname>.<pipe>.log``
+    This is the options to the gunicorn application and directly affects the gunicorn logging behaviour within supervisord.
+    every application setup for logging will have the same logfile naming convention where the ``logdir`` is
+    defined and then the name will consist of ``<appname>.<stream>.log`` Both error and standard out streams are configured.
     
 Gunicorn
 ---------
+Serves the the Devilry site to the outgoing server. Gunicorn is a WSGI server to be used behind a HTTP proxy server
+for incoming request-managment.
+
+What is logged ?
+^^^^^^^^^^^^^^^^
 
 Celery Worker
 --------------
+Manage the Celery Workers configured for task managment.
+
+What is logged ?
+^^^^^^^^^^^^^^^^
 
 Celery Beat
 ------------
+Celery Beat is the scheduler that starts the given tasks at defined intervals
+
+What is logged ?
+^^^^^^^^^^^^^^^^
 
 Run_Solr
 ---------
+This is a buildout recipe for creating a ``run_solr.sh`` file. A script that ease the Apache Solr configuration
+for use with HayStack. It is the search engine of Devilry.
+
+What is logged ?
+^^^^^^^^^^^^^^^^
 
 Rebuild the Supervisord config (output in ``parts/supervisor/supervisord.conf``)::
 
