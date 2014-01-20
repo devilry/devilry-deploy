@@ -59,6 +59,18 @@ as ``Vagrantfile`` (I.E.: It should be available as
 ``/vagrant/dbdump.postgres.sql`` to the Vagrant VM).
 
 
+.. note:: Does your database dumps create a database?
+
+    The ``load_dump`` recipe creates a database for you, so please
+    remove/comment out any create database and change database owner lines in
+    your dump. They look like this::
+
+        CREATE DATABASE devilry_prod WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'C' LC_CTYPE = 'nb_NO.UTF8';
+
+        ALTER DATABASE devilry_prod OWNER TO devilry;
+
+
+
 Tips
 ====
 Re-provisioning a lot, and tired of waiting for ``dev_autodb``? Edit
