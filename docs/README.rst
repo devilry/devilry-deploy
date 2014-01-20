@@ -3,7 +3,8 @@ Build docs
 ::
 
     $ virtualenv .
-    $ bin/easy_install zc.buildout
+    $ bin/pip install zc.buildout
+    $ bin/pip install sphinx_rtd_theme
     $ bin/buildout
     $ bin/sphinxbuilder
 
