@@ -1,14 +1,12 @@
 .. _version1.4.0:
 
-.. warning:: NOT RELEASED YET, this is document is a work in progress.
-
 ==============================
 Migrating from 1.3.6 to 1.4.0
 ==============================
 
 
 Changes
-#############
+#######
 
 - A few new cache fields in the core database models to speed up database queries.
 - New examiner UI.
@@ -25,8 +23,47 @@ BACKUP. YOUR. DATABASE. AND. FILES.
 Update devilry
 ##############
 
-TODO
+1 --- Update as usual, but stop after step 3
+============================================
+Update ``REVISION`` to ``v1.4.0`` using the instructions in the :ref:`update guide <update>`,
+**but** stop after step 3 (do not restart supervisord).
 
-Rebuild the search index
-========================
-TODO: How to recreate the index with SOLR (needs to update the schema xml i think).
+
+2 --- Migrate the database
+==========================
+Run the database migrations with::
+
+    $ bin/django.py migrate
+
+
+.. note::
+
+    This may take some time. We migrate some data for existing groups and deliveries, so
+    the migrations will query for all of your groups and deliveries, and update most of
+    them.
+
+.. warning::
+
+    If the migration fails with the following error message::
+
+        django.db.utils.DatabaseError: relation "celery_taskmeta" already exists
+
+    Check if::
+
+        $ bin/django.py migrate --list
+
+    shows that no migrations for ``djcelery`` has an ``(X)`` in front of it. If that is the case, run::
+
+        $ bin/django.py migrate djcelery 0001 --fake
+        $ bin/django.py migrate djcelery 0002 --fake
+        $ bin/django.py migrate djcelery 0003 --fake
+        $ bin/django.py migrate djcelery 0004 --fake
+
+    Then re-run::
+
+        $ bin/django.py migrate
+
+
+3 --- Continue the regular update guide
+=======================================
+Continue with the last step of the :ref:`update guide <update>` (restart supervisord).
