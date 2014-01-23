@@ -78,7 +78,9 @@
         "recipe[django_postgresql]",
         /*"recipe[django_postgresql::load_dump]",*/
         "recipe[devilryprodenv]",
+        "recipe[devilrydemo::install_useful_tools]",
         "recipe[devilrydemo]",
+        /*"recipe[devilry_minimal_autodb]",*/
         "recipe[devilrydemo::creategrandma]",
 
         "recipe[devilryprodenv::start]",
