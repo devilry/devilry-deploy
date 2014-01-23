@@ -73,12 +73,26 @@ as ``Vagrantfile`` (I.E.: It should be available as
 
 Tips
 ====
+
+Take a Database dump
+--------------------
+::
+
+    $ vagrant ssh
+    $ sudo -u postgres pg_dump djangodb > /vagrant/mydump.sql
+
+NOTE: You should write the dump to ``dbdump.postgres.sql`` if you want to
+restore/load it as described above.
+
+
+Tired of waiting?
+-----------------
 Re-provisioning a lot, and tired of waiting for ``dev_autodb``? Edit
 ``chef/roles/demoserver.json`` and change ``recipe[devilrydemo]`` to
 ``recipe[devilry_minimal_autodb]``. ``devilry_minimal_autodb`` runs
 ``dev_autodb --no-groups``, which means that the testdatabase will not have any
 students/groups registered on the assignments. Just make sure you do not commit
-this change.
+this change. You may also consider loading a dump as described above.
 
 
 
