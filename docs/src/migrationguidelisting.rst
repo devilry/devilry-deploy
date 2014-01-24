@@ -8,6 +8,7 @@ the :ref:`update guide <update>` guide is all you need.
 .. toctree::
     :maxdepth: 1
 
+    migrationguides/1.4.2
     migrationguides/1.4.1
     migrationguides/1.4.0
     migrationguides/1.3.6
