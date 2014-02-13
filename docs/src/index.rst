@@ -27,6 +27,7 @@ Contents:
    trix
    vagrant
    migrationguidelisting
+   managementcommands
 
 Indices and tables
 ==================
