@@ -1,8 +1,6 @@
-========================================
+=============================
 Migrating from 1.4.5 to 1.4.6
-========================================
-
-.. warning:: Development version - not released yet.
+=============================
 
 Bugfixes, see: http://devilry.readthedocs.org/en/latest/releasenotes-1.4.6.html
 
