@@ -3,7 +3,7 @@ Migrating from 1.4.10 to 1.4.11
 ===============================
 
 Bugfixes and improvements: 
-see: http://devilry.readthedocs.org/en/latest/releasenotes-1.4.10.html
+see: http://devilry.readthedocs.org/en/latest/releasenotes-1.4.11.html
 
 
 Backup database and files
