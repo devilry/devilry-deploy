@@ -2,6 +2,10 @@
 Migrating from 1.4.10 to 1.4.11
 ===============================
 
+.. warning::
+
+    This release does not build. Use version 1.4.12 instead.
+
 Bugfixes and improvements: 
 see: http://devilry.readthedocs.org/en/latest/releasenotes-1.4.11.html
 
